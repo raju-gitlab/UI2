@@ -1,0 +1,36 @@
+.container {
+    display: grid;
+    grid-template-columns: 7% 73% 20%;
+    /* padding: 10px; */
+    width: 100%;
+}
+
+.grid-item1 {
+    background-color: purple;
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
+    /* padding: 20px; */
+    font-size: 30px;
+    text-align: center;
+    height: 100vh;
+}
+.grid-item2 {
+    background-color: rgba(255, 0, 0, 0.8);
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
+    /* padding: 20px; */
+    font-size: 30px;
+    text-align: center;
+}
+.grid-item3 {
+    background-color: rgba(41, 0, 0, 0.8);
+    /* border: 1px solid rgba(0, 0, 0, 0.8); */
+    /* padding: 20px; */
+    font-size: 30px;
+    text-align: center;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
