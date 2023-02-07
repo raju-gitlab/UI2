@@ -1,0 +1,25 @@
+.i-div-container {
+    position: relative;
+    width: 100%;
+}
+.i-div-container .btn-submit {
+    position: absolute;
+    border-radius: 50px;
+    right: 18%;
+    z-index: 2;
+    border: none;
+    top: 10px;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    background-color: #1e90ff;
+    transform: translateX(2px);
+}
+.searchbar {
+    width: 66%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 9px;
+    border: 1px solid;
+    height: 3em;
+}

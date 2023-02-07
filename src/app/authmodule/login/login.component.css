@@ -1,0 +1,40 @@
+h2 {
+    text-align: center;
+    width: 15%;
+    position: relative;
+    top: 0;
+    max-width: 100%;
+    left: 50%;
+    transform: translate(-50%, 10px);
+}
+.loginBox {
+    height: 40vh;
+    width: 25em;
+    max-width: 100%;
+}
+.inputfiled {
+    width: 100%;
+    max-width: 80%;
+    position: absolute;
+    display: block;
+    left: 8%;
+    outline: none;
+    border: 1px solid black;
+    height: 2em;
+    border-radius: 8px;
+    text-indent: 10px;
+}
+.login_btn {
+    position: absolute;
+    top: 145px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    max-width: 30%;
+    height: 100%;
+    max-height: 30px;
+    border: none;
+}

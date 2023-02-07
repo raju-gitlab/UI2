@@ -5,20 +5,32 @@ import { AuthmoduleRoutingModule } from './authmodule-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RestPasswordComponent } from './rest-password/rest-password.component';
-import { AppRoutingModule } from '../app-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { DataService } from '../services/data.service';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
     RestPasswordComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
+    BrowserModule,
     CommonModule,
-    MaterialModule,
-    AuthmoduleRoutingModule
-  ]
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AuthmoduleRoutingModule,
+    MaterialModule
+  ],
+  providers: [DataService]
 })
 export class AuthmoduleModule { }

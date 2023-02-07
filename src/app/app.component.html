@@ -1,20 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
 </head>
+
 <body>
     <div class="container">
         <div class="grid-item1">
-            <mat-icon>
-                receipt_long
-            </mat-icon>
+            <span>
+                <a routerLink='posts/CreatePost' style="text-decoration: none;">
+                    <mat-icon class="icon-settings" aria-hidden="false" aria-label="Example home icon" fontIcon="article"></mat-icon>
+                    <span style="font-size: 12px;">View posts</span>
+                </a>
+            </span>
+            <span>
+                <a routerLink='login' style="text-decoration: none;">
+                    <mat-icon>
+                        post_add
+                    </mat-icon>
+                    <span style="font-size: 12px;">Add new post</span>
+                </a>
+            </span>
+            <span>
+                <a routerLink='login'>
+                    <mat-icon>
+                        web
+                    </mat-icon>
+                </a>
+                <span style="font-size: 12px;">View pages</span>
+            </span>
+
+            <span >
+                <a href="" style="text-decoration: none;" class="material-symbols-outlined">
+                    <!-- <span > -->
+                        clinical_notes
+                    <!-- </span> -->
+                </a>
+                <span style="font-size: 12px;">Your pages</span>
+            </span>
+
+            <span style="position: relative;top: 42%;">
+                <a href="" style="text-decoration: none;">
+                    <mat-icon>
+                        light_mode
+                    </mat-icon>
+                </a>
+                <span style="font-size: 12px;">Day mode</span>
+            </span>
+
+            <span style="position: relative;top: 43%;">
+                <a routerLink='login'>
+                    <mat-icon>
+                        account_circle
+                    </mat-icon>
+                </a>
+                <span style="font-size: 12px;">Manage account</span>
+            </span>
+            <!-- <span>
+                <a routerLink='login'>
+                    <mat-icon>
+                        login
+                    </mat-icon>
+                </a>
+                <span style="font-size: 12px;">Login</span>
+            </span> -->
+            <span style="position: relative;top: 44%;">
+                <button type="button" (click)="openDialog()" style="outline: none;color: rgb(140, 39, 235);background: transparent;border: none;">
+                    <mat-icon>
+                        logout
+                    </mat-icon>
+                </button>
+                <span style="font-size: 12px;">Logout</span>
+            </span>
         </div>
-        <div class="grid-item2">2</div>
+        <div class="grid-item2">
+            <router-outlet></router-outlet>
+        </div>
         <div class="grid-item3">3</div>
-      </div>
+    </div>
+    <div class="panel" [style.visibility]='isvisible'>
+        <!-- <div style="position: sticky;top: 0;"> -->
+            <p>lorem</p>
+        <!-- </div> -->
+    </div>
 </body>
+
 </html>

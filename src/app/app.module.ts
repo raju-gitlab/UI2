@@ -10,21 +10,31 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from './services/data.service';
 import { CommonModule } from '@angular/common';
 import { AuthmoduleRoutingModule } from './authmodule/authmodule-routing.module';
+import { PostsRoutingModule } from './posts/posts-routing.module';
+import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './auths/profile/profile.component';
+import { AuthmoduleModule } from './authmodule/authmodule.module';
+import { PostsModule } from './posts/posts.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthmoduleRoutingModule
+    AuthmoduleRoutingModule,
+    PostsRoutingModule,
+    AppRoutingModule,
+    MaterialModule,
+    AuthmoduleModule,
+    PostsModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
