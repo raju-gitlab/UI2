@@ -1,3 +1,8 @@
+.loginBox {
+    height: 40vh;
+    width: 25em;
+    max-width: 100%;
+}
 h2 {
     text-align: center;
     width: 15%;
@@ -7,11 +12,6 @@ h2 {
     left: 50%;
     transform: translate(-50%, 10px);
 }
-.loginBox {
-    height: 40vh;
-    width: 25em;
-    max-width: 100%;
-}
 .inputfiled {
     width: 100%;
     max-width: 80%;
@@ -20,7 +20,7 @@ h2 {
     left: 8%;
     outline: none;
     border: 1px solid black;
-    height: 2em;
+    height: 2.5em;
     border-radius: 8px;
     text-indent: 10px;
 }

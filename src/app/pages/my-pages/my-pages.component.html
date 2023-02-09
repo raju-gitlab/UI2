@@ -1,0 +1,31 @@
+<div class="header">
+    <!-- <p>Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p> -->
+    <!-- <button><i><mat-icon>post_add</mat-icon></i>New</button> -->
+    <a routerLink="/pages/createpage" mat-fab extended color="primary" class="post_addbutton">
+        <mat-icon>post_add</mat-icon>
+        New page
+    </a>
+</div>
+<div *ngIf="condition; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <div class="list-items">
+        <div class="sub-items">
+            <img src="assets/test.png" alt="" srcset="" style="width: 8vw;
+            height: 18vh;
+            position: relative;
+            right: 32%;">
+        </div>
+        <div class="sub-items">
+            <img src="assets/nopages.png" alt="" srcset="" style="width: 8vw;
+            height: 18vh;
+            position: relative;
+            right: 32%;">
+        </div>
+        <!-- <div class="sub-items"></div>s -->
+    </div>
+</ng-template>
+<ng-template #elseBlock>
+    <div class="elem">
+        <img src="assets/nopages.png" class="no_content_img" alt="" srcset="">
+    </div>
+</ng-template>

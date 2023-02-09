@@ -15,6 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './auths/profile/profile.component';
 import { AuthmoduleModule } from './authmodule/authmodule.module';
 import { PostsModule } from './posts/posts.module';
+import { PagesRoutingModule } from './pages/pages-routing.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { PostsModule } from './posts/posts.module';
     AppRoutingModule,
     MaterialModule,
     AuthmoduleModule,
-    PostsModule
+    PostsModule,
+    PagesRoutingModule,
+    PagesModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
