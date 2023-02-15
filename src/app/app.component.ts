@@ -1,8 +1,10 @@
-import { NONE_TYPE } from '@angular/compiler';
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from './authmodule/login/login.component';
-import { LogoutComponent } from './authmodule/logout/logout.component';
+import { Component, OnInit } from '@angular/core';
+export interface Tile {
+  color: string;
+  cols: number;
+  rows: number;
+  text: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -10,24 +12,24 @@ import { LogoutComponent } from './authmodule/logout/logout.component';
   styleUrls: ['./app.component.css']
 })
 
-
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'API';
-  isvisible = 'hidden';
+  Isloggedin: Boolean = true;
+  closeResult = '';
+  authlink : string = "null";
 
-  public constructor(private popup: MatDialog) { }
-  fcuntionTest() {
-    this.isvisible = 'visible';
-    console.log("Detected");
+  public constructor() { 
   }
-  fcuntionTest2() {
-    this.isvisible = 'hidden'
-    console.log("also detected");
-  }
-  openDialog() {
-    this.popup.open(LoginComponent);
-  }
-  Logout() {
-    this.popup.open(LogoutComponent);
+  
+
+  tiles: Tile[] = [
+    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
+    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
+    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
+    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
+  ];
+
+  ngOnInit(): void {
+    this.authlink = "login";
   }
 }

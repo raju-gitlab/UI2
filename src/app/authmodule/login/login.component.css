@@ -1,8 +1,10 @@
 .loginBox {
-    height: 40vh;
-    width: 25em;
+    position: relative;
+    height: auto;
+    width: 100%;
     max-width: 100%;
 }
+
 h2 {
     text-align: center;
     width: 15%;
@@ -12,29 +14,120 @@ h2 {
     left: 50%;
     transform: translate(-50%, 10px);
 }
+
 .inputfiled {
+    display: block;
     width: 100%;
-    max-width: 80%;
-    position: absolute;
+    max-width: 99%;
+    display: block;
+    left: 8%;
+    outline: none;
+    border: 1px solid #ccc;
+    height: 2.5em;
+    border-radius: 8px;
+    text-indent: 10px;
+    transition: 0.5s;
+}
+
+.login_btn {
+    width: 100%;
+    max-width: 100%;
     display: block;
     left: 8%;
     outline: none;
     border: 1px solid black;
-    height: 2.5em;
+    height: 2em;
     border-radius: 8px;
     text-indent: 10px;
-}
-.login_btn {
-    position: absolute;
-    top: 145px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    outline: none;
+    margin-top: 19px;
     cursor: pointer;
+    font-size: 18px;
+}
+
+.field_info {
+    position: relative;
+    font-size: 15px;
+    margin-bottom: 0;
+    text-align: start;
+    left: 2%;
+}
+
+.form {
+    position: relative;
+    left: 5%;
+    top: 0%;
+    /* transform: translate(61%, 0%); */
+    max-width: 90%;
     width: 100%;
-    max-width: 30%;
-    height: 100%;
-    max-height: 30px;
-    border: none;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+    opacity: 0.5;
+
+}
+
+.link:hover {
+    opacity: 1;
+}
+
+.nav_item {
+    width: 100%;
+    max-width: 100%;
+    left: 0%;
+    position: relative;
+}
+
+.icon {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.icon:hover:nth-child(1) {
+    opacity: 0.7;
+    fill: red;
+}
+
+.icon:hover:nth-child(2) {
+    opacity: 0.7;
+    fill: black;
+}
+
+.icon:hover:nth-child(3) {
+    opacity: 1;
+    fill: #097eeb;
+}
+
+.icon:hover:nth-child(4) {
+    opacity: 1;
+    fill: #125fa8;
+}
+
+.login_option {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 44%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+input[type=text]:focus {
+    border: 1px solid #555;
+}
+.container {
+    height: 80%;
+    width: 100%;
+    max-width: 45%;
+    position: absolute;
+    top: 50%;
+    left: 44%;
+    transform: translate(-50%, -50%);
+}
+.nav_items {
+    display: flex;
+    justify-content: space-between;
 }

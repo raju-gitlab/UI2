@@ -12,6 +12,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './logout/logout.component';
+import { AuthmainComponent } from './authmain.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { LogoutComponent } from './logout/logout.component';
     RegisterComponent,
     RestPasswordComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    AuthmainComponent
   ],
   imports: [
     BrowserModule,

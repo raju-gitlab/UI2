@@ -1,95 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Document</title>
 </head>
-
 <body>
-    <div class="container">
-        <div class="grid-item1">
-            <span>
-                <a routerLink='posts/CreatePost' style="text-decoration: none;">
-                    <mat-icon class="icon-settings" aria-hidden="false" aria-label="Example home icon" fontIcon="article"></mat-icon>
-                    <span style="font-size: 12px;">View posts</span>
-                </a>
-            </span>
-            <span>
-                <a routerLink='login' style="text-decoration: none;">
-                    <mat-icon>
-                        post_add
-                    </mat-icon>
-                    <span style="font-size: 12px;">Add new post</span>
-                </a>
-            </span>
-            <span>
-                <a routerLink='login'>
-                    <mat-icon>
-                        web
-                    </mat-icon>
-                </a>
-                <span style="font-size: 12px;">View pages</span>
-            </span>
-
-            <span >
-                <a routerLink="pages/mypages" style="text-decoration: none;" class="material-symbols-outlined">
-                    <!-- <span > -->
-                        clinical_notes
-                    <!-- </span> -->
-                </a>
-                <span style="font-size: 12px;"> 
-                    <a routerLink="pages/mypages" style="text-decoration: none;">My pages</a>
-                </span>
-                </span>
-
-            <span style="position: relative;top: 42%;">
-                <a href="" style="text-decoration: none;">
-                    <mat-icon>
-                        light_mode
-                    </mat-icon>
-                </a>
-                <span style="font-size: 12px;">Day mode</span>
-            </span>
-
-            <span style="position: relative;top: 43%;">
-                <a routerLink='login'>
-                    <mat-icon>
-                        account_circle
-                    </mat-icon>
-                </a>
-                <span style="font-size: 12px;">Manage account</span>
-            </span>
-            <!-- <span>
-                <a routerLink='login'>
-                    <mat-icon>
-                        login
-                    </mat-icon>
-                </a>
-                <span style="font-size: 12px;">Login</span>
-            </span> -->
-            <span style="position: relative;top: 44%;">
-                <button type="button" (click)="openDialog()" style="outline: none;color: rgb(140, 39, 235);background: transparent;border: none;">
-                    <mat-icon>
-                        logout
-                    </mat-icon>
-                </button>
-                <span style="font-size: 12px;">Logout</span>
-            </span>
+    <div class="grid-container">
+        <div class="header">
+            <h2>Header</h2>
         </div>
-        <div class="grid-item2">
+        <div class="left">
+            <div style="margin-top: 10px;">
+                <a routerLink="" id="suggestion_tag">
+                  <svg style="display:block; margin:auto" width="23px" height="23px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fffafa" stroke="#fffafa"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:#ffffff;}.cls-2{fill:#ffffff;}.cls-3{fill:#ffffff;}.cls-4{fill:#000000;}</style> </defs> <g id="Icons"> <path class="cls-1" d="M21,10.66V20a3,3,0,0,1-3,3H6a3,3,0,0,1-3-3V4A3,3,0,0,1,6,1h5.34a4,4,0,0,1,2.83,1.17l5.66,5.66A4,4,0,0,1,21,10.66Z"></path> <path class="cls-2" d="M21,10.66V15a3,3,0,0,1-3,3H6a3,3,0,0,1-3-3V4A3,3,0,0,1,6,1h5.34a4,4,0,0,1,2.83,1.17l5.66,5.66A4,4,0,0,1,21,10.66Z"></path> <path class="cls-3" d="M20.64,9H16a3,3,0,0,1-3-3V1.36a4.089,4.089,0,0,1,1.17.81l5.66,5.66A4.089,4.089,0,0,1,20.64,9Z"></path> </g> <g data-name="Layer 4" id="Layer_4"> <path class="cls-4" d="M20.535,7.122,14.879,1.464A4.981,4.981,0,0,0,13.462.487c-.035-.018-.066-.04-.1-.055A4.984,4.984,0,0,0,11.343,0H6A4,4,0,0,0,2,4V20a4,4,0,0,0,4,4H18a4,4,0,0,0,4-4V10.657a4.968,4.968,0,0,0-.433-2.016.85.85,0,0,0-.055-.1A4.976,4.976,0,0,0,20.535,7.122ZM18.586,8H16a2,2,0,0,1-2-2V3.414ZM20,20a2,2,0,0,1-2,2H6a2,2,0,0,1-2-2V4A2,2,0,0,1,6,2h5.343A3,3,0,0,1,12,2.078V6a4,4,0,0,0,4,4h3.92a2.953,2.953,0,0,1,.08.657Z"></path> <path class="cls-4" d="M13,15H11V13a1,1,0,0,0-2,0v2H7a1,1,0,0,0,0,2H9v2a1,1,0,0,0,2,0V17h2a1,1,0,0,0,0-2Z"></path> </g> </g></svg>  
+                  <div>Create Page</div>
+                </a>
+            </div>
+            <div style="margin-top: 10px;">
+                <a routerLink="" id="suggestion_tag">
+                    <svg width="23px" height="23px" style="display:block ;margin:auto;" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill-rule="evenodd" clip-rule="evenodd" stroke="none" stroke-width="1"> <path d="M1468.235 113v99.388l-112.94 112.941v-99.388H112.94v1468.235h1242.353v-438.211l112.941-112.941v664.094H0V113h1468.235ZM421.271 1163.353c96-9.035 154.729 108.423 190.87 197.647 28.235 68.894 38.4 92.612 72.283 96 33.882 3.388 89.223-58.73 112.94-101.647 16.53-26.51 51.42-34.6 77.93-18.07 26.51 16.529 34.6 51.42 18.07 77.929-9.035 16.94-92.611 160.376-205.552 160.376h-9.036c-70.023-4.517-121.976-48.564-169.411-166.023-47.436-117.46-77.93-127.624-77.93-127.624a484.518 484.518 0 0 0-97.13 225.883c-6.549 31.187-37.14 51.16-68.329 44.611-31.187-6.55-51.16-37.141-44.611-68.33 20.33-94.87 79.059-310.587 199.906-320.752Zm256.376-485.647v112.941H338.824V677.706h338.823ZM903.53 451.824v112.94H338.824v-112.94h564.705Z"></path> <path d="m1903.059 468.765-225.883-225.883a56.47 56.47 0 0 0-80.188 0L919.341 920.53a56.476 56.476 0 0 0-15.813 39.53v282.353h282.354a56.47 56.47 0 0 0 39.53-16.941l677.647-677.647c21.523-21.959 21.523-57.101 0-79.06Zm-740.894 660.706H1016.47V983.776l451.764-451.764 145.694 145.694-451.764 451.765Zm531.953-531.953-145.694-145.694 89.223-89.224 145.694 145.694-89.223 89.224Z"></path> </g> </g></svg>
+                    <div>New post</div>
+                </a>
+            </div>
+            <div style="margin-top: 10px;">
+                <a routerLink="" id="suggestion_tag">
+                    <svg fill="#000000" width="23px" height="23px" style="display:block ;margin:auto;" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M489.976,110c-0.001-2.602-0.993-5.158-2.905-7.071l-100-100c-1.913-1.912-4.47-2.903-7.071-2.904V0H110 c-5.523,0-10,4.477-10,10v50H10C4.477,60,0,64.478,0,70v355c0,5.522,4.477,10,10,10h90v45c0,5.522,4.477,10,10,10h370 c5.523,0,10-4.478,10-10V110H489.976z M390,34.143L455.858,100H390V34.143z M20,415V80h172.5v67.5c0,5.523,4.477,10,10,10H270 V415H20z M212.5,137.5V94.143l43.357,43.357H212.5z M470,470H120v-35h160c5.523,0,10-4.478,10-10V147.5 c0-2.652-1.054-5.195-2.929-7.071l-77.5-77.5C207.696,61.054,205.152,60,202.5,60H120V20h250v90c0,5.522,4.477,10,10,10h90V470z"></path> <rect x="310" y="160" width="130" height="20"></rect> <rect x="310" y="220" width="130" height="20"></rect> <rect x="310" y="280" width="130" height="20"></rect> <rect x="310" y="340" width="130" height="20"></rect> <rect x="310" y="400" width="130" height="20"></rect> <rect x="45" y="105" width="65" height="20"></rect> <rect x="45" y="145" width="65" height="20"></rect> <rect x="45" y="205" width="200" height="20"></rect> <rect x="45" y="255" width="200" height="20"></rect> <rect x="45" y="305" width="200" height="20"></rect> <rect x="45" y="355" width="200" height="20"></rect> </g> </g> </g> </g></svg>
+                    <div>Your pages</div>
+                </a>
+            </div>
+            <div class="controlbuttons">
+                <div mat-card-avatar class="header-image"></div>
+                <div>
+                    <a routerLink="" id="suggestion_tag">
+                        <svg fill="#000000" width="23px" height="23px" style="display:block ;margin:auto;" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="36.480000000000004"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="m1739.34 1293.414-105.827 180.818-240.225-80.188-24.509 22.25c-69.91 63.586-150.211 109.666-238.644 136.771l-32.076 9.94-49.468 244.065H835.584l-49.468-244.179-32.076-9.939c-88.432-27.105-168.734-73.185-238.644-136.771l-24.508-22.25-240.226 80.189-105.826-180.82 189.74-164.442-7.453-32.978c-10.39-45.742-15.586-91.483-15.586-135.869 0-44.386 5.195-90.127 15.586-135.868l7.454-32.979-189.741-164.442 105.826-180.819 240.226 80.075 24.508-22.25c69.91-63.585 150.212-109.665 238.644-136.884l32.076-9.826 49.468-244.066h213.007l49.468 244.18 32.076 9.825c88.433 27.219 168.734 73.186 238.644 136.885l24.509 22.25 240.225-80.189 105.826 180.819-189.74 164.442 7.453 32.98c10.39 45.74 15.586 91.481 15.586 135.867 0 44.386-5.195 90.127-15.586 135.869l-7.454 32.978 189.741 164.556Zm-53.76-333.403c0-41.788-3.84-84.48-11.634-127.284l210.184-182.062-199.454-340.856-265.186 88.433c-66.974-55.567-143.322-99.388-223.85-128.414L1140.977.01H743.198l-54.663 269.704c-81.431 29.139-156.424 72.282-223.963 128.414L199.5 309.809.045 650.665l210.07 182.062c-7.68 42.804-11.52 85.496-11.52 127.284 0 41.789 3.84 84.48 11.52 127.172L.046 1269.357 199.5 1610.214l265.186-88.546c66.974 55.68 143.323 99.388 223.85 128.527l54.663 269.816h397.779l54.663-269.703c81.318-29.252 156.424-72.283 223.85-128.527l265.186 88.546 199.454-340.857-210.184-182.174c7.793-42.805 11.633-85.496 11.633-127.285ZM942.075 564.706C724.1 564.706 546.782 742.024 546.782 960c0 217.976 177.318 395.294 395.294 395.294 217.977 0 395.294-177.318 395.294-395.294 0-217.976-177.317-395.294-395.294-395.294m0 677.647c-155.633 0-282.353-126.72-282.353-282.353s126.72-282.353 282.353-282.353S1224.43 804.367 1224.43 960s-126.72 282.353-282.353 282.353" fill-rule="evenodd"></path> </g></svg>
+                        <div>Settings</div>
+                    </a>
+                </div>
+                <div>
+                    <a [routerLink]="authlink" id="suggestion_tag">
+                        <svg *ngIf="Isloggedin" width="23px" height="23px" style="display:block ;margin:auto;" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect> <path d="M23.9917 6L6 6L6 42H24" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M25 33L16 24L25 15" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M42 23.9917L16 23.9917" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        <div *ngIf="Isloggedin">Login</div>
+                        
+                        <svg *ngIf="!Isloggedin" width="23px" height="23px" style="display:block ;margin:auto;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M15 3H7C5.89543 3 5 3.89543 5 5V19C5 20.1046 5.89543 21 7 21H15" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M19 12L15 8M19 12L15 16M19 12H9" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></g></svg>
+                        <div *ngIf="!Isloggedin">Logout</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="middle">
             <router-outlet></router-outlet>
         </div>
-        <div class="grid-item3">3</div>
-    </div>
-    <div class="panel" [style.visibility]='isvisible'>
-        <!-- <div style="position: sticky;top: 0;"> -->
-            <p>lorem</p>
-        <!-- </div> -->
+        <div class="right" style="background-color:#ccc;">
+        </div>
+        <div class="footer">
+            <p>Footer</p>
+        </div>
     </div>
 </body>
-
 </html>

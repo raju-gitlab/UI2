@@ -9,9 +9,8 @@ import { DataService } from 'src/app/services/data.service';
 export class LoginComponent implements OnInit{
 
   loginForm = new FormGroup({
-    PostTitle: new FormControl('', Validators.required),
-    PostDescription: new FormControl('', Validators.required),
-    fielslist: new FormControl('', Validators.required)
+    Username: new FormControl('', Validators.required),
+    Password: new FormControl('', Validators.required)
   });
 
   public constructor(private data: DataService) {
@@ -19,13 +18,7 @@ export class LoginComponent implements OnInit{
   }
 
   onFormSubmit() {
-    this.data.post("Posts/AddPost", this.loginForm.value).subscribe(data => {
-      if (data) {
-        console.log(data);
-      } else {
-        console.log("Not fetched");
-      }
-    })
+    console.log(this.loginForm.value);
   }
   ngOnInit(): void {
     
