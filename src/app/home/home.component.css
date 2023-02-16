@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
   .contentcard {
-    width: 55%;
+    width: 95%;
     position: relative;
     margin: auto;
   }
@@ -18,11 +18,33 @@
     width: 100%;
     max-width: 100%;
 }
-
-
-
-
-
+.conntainer {
+  display: flex;
+}
+.info_content {
+  width: 30%;
+  height: 50vh;
+  background-color: aqua;
+}
+.miscs_container {
+  position: sticky;
+  top: 0;
+  width: 30%;
+  height: auto;
+}
+.main_content{ 
+  width: 60%;
+}
+.info {
+  height: auto;
+  border: 1px solid black;
+  padding: 10px;
+}
+.stickyinfo {
+  height: auto;
+  position: sticky;
+  top: 0;
+}
 
 
 

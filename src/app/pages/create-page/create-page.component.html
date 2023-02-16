@@ -1,18 +1,46 @@
-<div class="container">
-    <form class="form">
-        <div>
-            <input type="text" name="" id=""> <br>
-            <textarea name="" id="" cols="30" rows="10"></textarea> <br>
+<div class="body_container">
+  <div class="leftdiv">
+    <p class="heading">Create Page</p>
+    <form [formGroup]="pageform" (ngSubmit)="onFormSubmit()">
+      <p>
+        <span class="helptext">Enter your page title :</span>
+        <input type="text" name="fieldname" formControlName="PageName" class="textfield" id="pagetitle" placeholder="">
+      </p>
+      <p>
+        <span class="helptext">Write something about your page :</span>
+        <textarea name="" class="textfield" formControlName="PageDescription" id="" cols="30" rows="2"></textarea>
+      </p>
+      <div style="display: flex;
+      justify-content: space-between;
+      width: 100%;">
+        <p style="width: 35%;">
+          <span class="helptext">Choose privacy :</span>
+          <select name="selectedTeam" class="drpdwn" formControlName="PrivacyType" (change)="changeWebsite($event)">
+            <option default>Choose here</option>
+            <option *ngFor="let item of privacylist" value="{{item.PrivacyUUID}}">{{item.PrivacyType}}</option>
+          </select>
+        </p>
+        <p>
+          <span class="helptext">Choose your page type :</span>
+          <select name="" id="" class="drpdwn" formControlName="CategoryType">
+            <option default>Choose here</option>
+            <option *ngFor="let item of categorylist" value="{{item.CategoryUUID}}">{{item.CategoryName}}</option>
+          </select>
+        </p>
+      </div>
+      <p [style.display]="isDisplay">
+        <span class="helptext">Enter your page title :</span>
+        <input type="text" class="textfield" id="pagetitle" placeholder="">
+      </p>
 
-            <input type="text" name="" id="" class="inputfield">
-            <select name="" id="">
-                <option value=""></option>
-                <option value=""></option>
-                <option value=""></option>
-            </select>
-        </div>
-        <div>
-            <input type="file" name="" id="">
-        </div>
+      <p>
+        <span class="helptext">Choose your page icon :</span>
+        <input mat-input type="file" #file name="" id="" (change)="selectFile($event)">
+      </p>
+      <button class="submit_btn" mat-stroked-button color="primary">Create page</button>
     </form>
+  </div>
+  <div class="rightdiv">
+    <img class="img" [src]="url" alt="">
+  </div>
 </div>

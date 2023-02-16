@@ -9,6 +9,7 @@ import { ManagePageComponent } from './manage-page/manage-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DataService } from '../services/data.service';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    HttpClientModule
-  ]
+    HttpClientModule,
+  ],
+  providers: [DataService]
 })
 export class PagesModule { }

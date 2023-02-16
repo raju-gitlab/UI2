@@ -11,8 +11,11 @@ import { LogoutComponent } from '../authmodule/logout/logout.component';
 })
 export class HomeComponent {
   isvisible = 'hidden';
-
+  title:String = "";
+  
   public constructor(private popup: MatDialog) { }
+
+
   fcuntionTest() {
     this.isvisible = 'visible';
     console.log("Detected");
@@ -27,4 +30,5 @@ export class HomeComponent {
   Logout() {
     this.popup.open(LogoutComponent);
   }
+  
 }

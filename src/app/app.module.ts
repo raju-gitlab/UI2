@@ -17,12 +17,14 @@ import { AuthmoduleModule } from './authmodule/authmodule.module';
 import { PostsModule } from './posts/posts.module';
 import { PagesRoutingModule } from './pages/pages-routing.module';
 import { PagesModule } from './pages/pages.module';
+import { SearchContentComponent } from './search-content/search-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    SearchContentComponent
   ],
   imports: [
     BrowserModule,

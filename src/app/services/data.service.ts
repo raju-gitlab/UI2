@@ -11,6 +11,9 @@ export class DataService {
 
   APIURL = "https://localhost:44379/api/";
 
+  get(urlParam : string) : Observable<any> {
+    return this.http.get(this.APIURL.toString() + urlParam, {'headers' : this.headers()});
+  }
   post(urlParam : string , data : any) : Observable<any>
   {
     return this.http.post(this.APIURL.toString() + urlParam,data,{'headers' : this.headers()});

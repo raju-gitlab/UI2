@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { SearchContentComponent } from './search-content/search-content.component';
 export interface Tile {
   color: string;
   cols: number;
@@ -18,17 +20,12 @@ export class AppComponent implements OnInit{
   closeResult = '';
   authlink : string = "null";
 
-  public constructor() { 
+  public constructor(private dialouge : MatDialog) { 
   }
   
-
-  tiles: Tile[] = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'},
-    {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
-  ];
-
+  opensearch() {
+    this.dialouge.open(SearchContentComponent);
+  }
   ngOnInit(): void {
     this.authlink = "login";
   }
