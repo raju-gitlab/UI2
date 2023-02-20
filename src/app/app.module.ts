@@ -18,6 +18,8 @@ import { PostsModule } from './posts/posts.module';
 import { PagesRoutingModule } from './pages/pages-routing.module';
 import { PagesModule } from './pages/pages.module';
 import { SearchContentComponent } from './search-content/search-content.component';
+import { BlogsModule } from './blogs/blogs.module';
+import { BlogsRoutingModule } from './blogs/blogs-routing.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { SearchContentComponent } from './search-content/search-content.componen
     AuthmoduleModule,
     PostsModule,
     PagesRoutingModule,
-    PagesModule
+    PagesModule,
+    BlogsModule,
+    BlogsRoutingModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

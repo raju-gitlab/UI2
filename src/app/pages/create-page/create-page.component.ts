@@ -18,7 +18,7 @@ export class CreatePageComponent implements OnInit {
   pageform = new FormGroup({
     PageName: new FormControl('', Validators.required),
     PageDescription: new FormControl('', Validators.required),
-    ProfileImagePath : new FormControl(File, Validators.required),
+    ProfileImagePath : new FormControl(null, Validators.required),
     PrivacyType : new FormControl('',Validators.required),
     CategoryType : new FormControl('', Validators.required)
   });
@@ -44,17 +44,20 @@ export class CreatePageComponent implements OnInit {
   selectFile(event: any) {
     console.log(event.target.files[0]);
     let file = event.target.files[0];
-    this.formdata.append("files", file);
-    this.pageform.patchValue({"ProfileImagePath": file});
+    var reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.url = reader.result; 
+		}
   }
 
   onFormSubmit() {
-    this.formdata.append("PageName", "MyPage");    
-    this.dataservice.post("Page/CreatePage", this.formdata).subscribe(data => {
-
+    console.log(this.pageform.value);
+    this.dataservice.post("page/CreatePage", this.pageform.value).subscribe(data => {
       console.log(data);
+      
     })
-  		console.log(this.pageform.value);
   }
   ngOnInit(): void { }
 }

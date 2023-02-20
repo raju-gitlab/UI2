@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SearchContentComponent } from './search-content/search-content.component';
+
+
 export interface Tile {
   color: string;
   cols: number;
@@ -22,7 +24,7 @@ export class AppComponent implements OnInit{
 
   public constructor(private dialouge : MatDialog) { 
   }
-  
+
   opensearch() {
     this.dialouge.open(SearchContentComponent);
   }

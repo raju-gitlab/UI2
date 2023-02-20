@@ -45,7 +45,10 @@
   position: sticky;
   top: 0;
 }
-
+.hu10_h {
+  display: flex;
+  justify-content: space-between;
+}
 
 
 

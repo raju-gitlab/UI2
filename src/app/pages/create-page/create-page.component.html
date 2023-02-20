@@ -1,3 +1,8 @@
+<div>
+  <span class="page_header">
+    <h6>GraspPoint</h6><h6>Pages</h6>
+  </span>
+</div>
 <div class="body_container">
   <div class="leftdiv">
     <p class="heading">Create Page</p>
@@ -32,10 +37,10 @@
         <span class="helptext">Enter your page title :</span>
         <input type="text" class="textfield" id="pagetitle" placeholder="">
       </p>
-
+      
       <p>
         <span class="helptext">Choose your page icon :</span>
-        <input mat-input type="file" #file name="" id="" (change)="selectFile($event)">
+        <input mat-input type="file" #file name="" id="" formControlName="ProfileImagePath" (change)="selectFile($event)">
       </p>
       <button class="submit_btn" mat-stroked-button color="primary">Create page</button>
     </form>

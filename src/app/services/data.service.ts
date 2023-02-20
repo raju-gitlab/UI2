@@ -14,7 +14,7 @@ export class DataService {
   get(urlParam : string) : Observable<any> {
     return this.http.get(this.APIURL.toString() + urlParam, {'headers' : this.headers()});
   }
-  post(urlParam : string , data : any) : Observable<any>
+  post(urlParam : string , data : any)
   {
     return this.http.post(this.APIURL.toString() + urlParam,data,{'headers' : this.headers()});
   }
