@@ -20,6 +20,7 @@ import { PagesModule } from './pages/pages.module';
 import { SearchContentComponent } from './search-content/search-content.component';
 import { BlogsModule } from './blogs/blogs.module';
 import { BlogsRoutingModule } from './blogs/blogs-routing.module';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BlogsRoutingModule } from './blogs/blogs-routing.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    QuillModule.forRoot(),
     AuthmoduleRoutingModule,
     PostsRoutingModule,
     AppRoutingModule,

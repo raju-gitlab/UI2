@@ -1,85 +1,79 @@
-.post_box {
+@import '~quill/dist/quill.bubble.css';
+.body_container {
     position: relative;
-    max-width: 95%;
-    /* height: 80vh; */
-    border: 1px solid black;
-    margin-bottom: 5px;
-    left: 2.3%;
-    border-radius: 7px;
+    display: flex;
+    height: auto;
+    width: 100%;
+    left: 5%;
 }
-.post_box .post_header {
-    height: 11vh;
-    align-items: self-start;
-    display: grid;
-    grid-template-columns: 10% 70% 10%;
+.leftdiv {
+    height: auto;
+    width: 67%;
 }
-.post_box .post_body {
-    background-color: greenyellow;
-    height: calc(100%-12vh+7vh);
+.rightdiv {
+    height: auto;
+    width: 25%;
 }
-p
-{
-    overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: auto;
-  font-size: 15px;
-  margin: 10px 0px 0px 0px;
-}
-.post_box .post_footer {
-    background-color: blue;
-    height: 7vh;
-}
-.search_box {
-    position: sticky;
-    top: 0;
-    height: 50px;
+.img {
     width: 100%;
     max-width: 100%;
+    height: auto;
 }
-.search_box .input_field {
-    outline: none;
-    border: 1px solid black;
-    border-radius: 5px;
+.textfield {
     width: 100%;
-    max-width: 50%;
-    height: 5vh;
-    left: 0;
-    right: 0;
-    margin: auto;
-    text-indent: 10px;
-}
-.btn_submit {
-    background: transparent;
     border: none;
-    position: absolute;
-    top: 10px;
-    left: 71%;
-    cursor: pointer;
+    border-bottom: 2px solid #00000026;
+    text-indent: 10px;
     outline: none;
 }
-img
-{
-max-width: 52px;
-    height: 52px;
-    border-radius: 52px;}
-i {
-    position: relative;
-    right: 40%;
+.chipsfield {
+    width: 100%;
+    border: none;
+    text-indent: 10px;
+    outline: none;
 }
-.menu_icon {
-    position: absolute;
-    right: 3%;
-    top: 15px;
+.helptext {
+    font-size: small;
+    font-weight: 500;
+    opacity: 0.7;
 }
-.post_info {
-    font-size: 16px;
-    position: relative;
-    top: 10px;
-    text-align: left;
-    transform: translateX(0px);
+.drpdwn {
+    width: 100%;
+    height: 10vh;
+    border: none;
+    border-bottom: 2px solid #00000026;
+    display: block;
+    outline: none;
 }
-.post_info_img {
+.submit_btn{ 
+    display: block;
+    margin: auto;
+}
+.heading {
+    font-size: 2em;
+    font-weight: 400;
+}
+.page_header {
+    text-align: center;
+}
+.ibc {
     position: relative;
-    left: 25%;
-    top: 10px;
+    height: auto;
+    width: 88%;
+    left: 5%;
+}
+.test {
+    background-color: transparent;
+}
+.OD1{ 
+    display: grid;
+    grid-template-columns: 76% 24%;
+    width: 100%;
+}
+.CL2 {
+    height: 50vh;
+    width: 100%;
+    overflow: auto;
+    /* background-color: ; */
+    border: 1px solid rgb(173, 173, 173);
 }

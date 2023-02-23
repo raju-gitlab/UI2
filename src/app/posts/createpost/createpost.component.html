@@ -1,25 +1,72 @@
-<div class="search_box">
-    <input type="text" name="" id="" class="input_field">
-    <button type="submit" class="btn_submit">
-        <mat-icon>search</mat-icon>
-    </button>
-</div>
+<div class="OD1">
+    <div class="CL1">
+        <form [formGroup]="pageform" (ngSubmit)="onFormSubmit()">
+            <div>
+                <div class="body_container">
+                    <div class="leftdiv">
+                        <p class="heading">Write your content </p>
+                        <p>
+                            <span class="helptext">Give a title to your post :</span>
+                            <input type="text" name="fieldname" formControlName="PageName" class="textfield" id="pagetitle"
+                                placeholder="write here.....">
+                        </p>
+                        <p>
+                            <span class="helptext">Choose tags :</span>
+                            <mat-form-field class="example-chip-list" class="chipsfield">
+                                <mat-chip-grid #chipGrid aria-label="Tags">
+                                    <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
+                                        {{fruit}}
+                                        <button matChipRemove [attr.aria-label]="'remove ' + fruit">
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                    </mat-chip-row>
+                                </mat-chip-grid>
+                                <input placeholder="write here....." #fruitInput [formControl]="fruitCtrl"
+                                    [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                                <mat-autocomplete class="test" #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                                        {{fruit}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </p>
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
+                            <p style="width: 40%;">
+                                <span class="helptext">Post Category :</span>
+                                <select name="selectedTeam" class="drpdwn" formControlName="PrivacyType"
+                                    (change)="changeWebsite($event)">
+                                    <option>Choose here</option>
+                                    <option *ngFor="let item of categorylist" value="{{item.CategoryUUID}}">{{item.CategoryName}}
+                                    </option>
+                                </select>
+                            </p>
+                            <p style="width: 58%;" class="textfield">
+                                <span class="helptext">Choose your page icon :</span>
+                                <input mat-input type="file" #file name="" id="" formControlName="ProfileImagePath" 
+                                    (change)="selectFile($event)">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rightdiv">
+                        <img class="img" [src]="url" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="ibc">
+                <quill-editor [modules]="modules" (onFocus)="focus($event)" (onEditorChanged)="changedEditor($event)"
+                    (onBlur)="blur($event)" (onEditorCreated)="created($event)"></quill-editor>
+            </div>
+            <div>
+                <button class="submit_btn" mat-stroked-button color="primary">Create post</button>
+            </div>
+        </form>
+    </div>
 
-<div class="post_box">
-    <div class="post_header">
-        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" class="post_info_img" alt="" srcset="">
-        <p class="post_info">John Doe</p>
-        <mat-icon class="menu_icon">more_horiz</mat-icon>
-    </div>
-    <div class="post_body">
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe iusto vel laudantium quo officia corrupti assumenda soluta vero, officiis earum rem distinctio accusamus doloribus, harum dignissimos amet atque minus consequatur?
-        </p>
-    </div>
-    <div class="post_footer">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+    <div class="CL2">
+        <!-- <ng-template>
+        </ng-template> -->
+        <p>Your posts : </p>
+
     </div>
 </div>
