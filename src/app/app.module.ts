@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
 import { AuthmoduleRoutingModule } from './authmodule/authmodule-routing.module';
 import { PostsRoutingModule } from './posts/posts-routing.module';
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './auths/profile/profile.component';
 import { AuthmoduleModule } from './authmodule/authmodule.module';
 import { PostsModule } from './posts/posts.module';
 import { PagesRoutingModule } from './pages/pages-routing.module';
@@ -26,7 +25,6 @@ import { QuillModule } from 'ngx-quill';
   declarations: [
     AppComponent,
     HomeComponent,
-    ProfileComponent,
     SearchContentComponent
   ],
   imports: [
