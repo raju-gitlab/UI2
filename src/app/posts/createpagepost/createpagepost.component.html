@@ -41,11 +41,40 @@
                                     </option>
                                 </select>
                             </p>
+                            <p style="width: 40%;">
+                                <span class="helptext">Select Privacy :</span>
+                                <select name="selectedTeam" class="drpdwn" formControlName="MediaVisibilityState"
+                                    (change)="changeWebsite($event)">
+                                    <option>Choose here</option>
+                                    <option *ngFor="let item of PrivacyLists" value="{{item.PrivacyUUID}}">{{item.PrivacyType}}
+                                    </option>
+                                </select>
+                            </p>
+                            
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 100%;">
+                            <p style="width: 40%;">
+                                <!-- <span class="helptext">Choose your page :</span> -->
+                                <mat-form-field>
+                                    <mat-label>Choose your page :</mat-label>
+                                    <mat-select>
+                                      <mat-option *ngFor="let item of Pagelists" [value]="item.PageUUID">
+                                        {{item.PageName}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                <!-- <select name="selectedTeam" class="drpdwn" formControlName="PageUUID"
+                                    (change)="changeWebsite($event)">
+                                    <option>Choose here</option>
+                                    <option *ngFor="let item of Pagelists" value="{{item.PageUUID}}">{{item.PageName}}
+                                    </option>
+                                </select> -->
+                            </p>
                             <p style="width: 58%;" class="textfield">
                                 <span class="helptext">Choose your page icon :</span>
                                 <input mat-input type="file" #file name="" id="" formControlName="ProfileImagePath" 
                                     (change)="selectFile($event)">
-                            </p>
+                            </p>    
                         </div>
                     </div>
                     <div class="rightdiv">

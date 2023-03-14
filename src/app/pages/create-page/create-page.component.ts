@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -23,7 +24,10 @@ export class CreatePageComponent implements OnInit {
     CategoryType : new FormControl('', Validators.required)
   });
   
-  public constructor(private dataservice : DataService) {
+  public constructor(private dataservice : DataService, private router: Router) {
+    if(!sessionStorage.getItem("username")?.toString()) {
+      this.router.navigateByUrl("login");
+    }
     this.dataservice.get("Misc/ListCategories").subscribe(data => {
       this.categorylist = data;
     });
@@ -54,10 +58,9 @@ export class CreatePageComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.pageform.value);
-    this.dataservice.post("page/CreatePage", this.pageform.value).subscribe(data => {
+    this.dataservice.authenticatedpost("page/CreatePage", this.pageform.value).subscribe(data => {
       console.log(data);
-      
-    })
+    });
   }
   ngOnInit(): void { }
 }

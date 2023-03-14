@@ -12,12 +12,14 @@ import { map, startWith } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
-  selector: 'app-createpost',
-  templateUrl: './createpost.component.html',
-  styleUrls: ['./createpost.component.css']
+  selector: 'app-createpagepost',
+  templateUrl: './createpagepost.component.html',
+  styleUrls: ['./createpagepost.component.css']
 })
-export class CreatepostComponent {
-  modules = {}
+export class CreatepagepostComponent {
+  modules = {};
+  Pagelists : any;
+  PrivacyLists : any;
   categorylist: any = null;
   isDisplay: string = "none";
   url: any = "assets/nopages.png";
@@ -37,7 +39,8 @@ export class CreatepostComponent {
     MediaVisibilityState: new FormControl('', Validators.required),
     PostCategoryName: new FormControl('', Validators.required),
     PostTags: new FormControl(''),
-    UserUUID : new FormControl('')
+    UserUUID: new FormControl(''),
+    PageUUID : new FormControl('')
   });
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | any;
@@ -50,6 +53,16 @@ export class CreatepostComponent {
     });
     this.dataservice.get("Misc/ListCategories").subscribe(data => {
       this.categorylist = data;
+    });
+    this.dataservice.authenticatedget("Page/PagesById").subscribe(data => {
+      this.Pagelists = data;
+      console.log(this.Pagelists);
+      
+    });
+    this.dataservice.authenticatedget("Misc/ListPrivacies").subscribe(data => {
+      this.PrivacyLists = data;
+      console.log(this.PrivacyLists);
+      
     });
     this.modules = {
       'toolbar': [
@@ -139,7 +152,7 @@ export class CreatepostComponent {
     this.blured = true
   }
 
-  add(event: MatChipInputEvent): void { 
+  add(event: MatChipInputEvent): void {
     this.tagsList = "," + this.tagsList + event.value;
     const value = (event.value || '').trim();
     if (value) {
@@ -173,8 +186,8 @@ export class CreatepostComponent {
   }
 
   onFormSubmit() {
-    this.PostForm.patchValue({"UserUUID" : sessionStorage.getItem("username")?.toString()});
-    this.PostForm.patchValue({"PostTags" : this.tagsList});
+    this.PostForm.patchValue({ "UserUUID": sessionStorage.getItem("username")?.toString() });
+    this.PostForm.patchValue({ "PostTags": this.tagsList });
     this.dataservice.post("Posts/AddPost", this.PostForm.value).subscribe(data => {
       console.log("Success");
     },

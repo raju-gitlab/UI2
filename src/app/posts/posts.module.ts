@@ -6,10 +6,12 @@ import { CreatepostComponent } from './createpost/createpost.component';
 import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
+import { CreatepagepostComponent } from './createpagepost/createpagepost.component';
 
 @NgModule({
   declarations: [
-    CreatepostComponent
+    CreatepostComponent,
+    CreatepagepostComponent
   ],
   imports: [
     CommonModule,

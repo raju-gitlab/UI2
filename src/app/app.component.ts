@@ -23,12 +23,26 @@ export class AppComponent implements OnInit{
   authlink : string = "null";
 
   public constructor(private dialouge : MatDialog) { 
+    let userName = sessionStorage.getItem("username");
+    if(userName) {
+      this.Isloggedin = false;
+      this.authlink = "logout";
+    }
+    else {
+      this.Isloggedin = true;
+      this.authlink = "login";
+    }
   }
 
   opensearch() {
     this.dialouge.open(SearchContentComponent);
   }
-  ngOnInit(): void {
+  logout() {
+    let a = confirm("Are you sure");
+    console.log(a);
+    sessionStorage.clear();
+    this.Isloggedin = true;
     this.authlink = "login";
   }
+  ngOnInit(): void { }
 }

@@ -1,27 +1,28 @@
 <div class="header">
     <!-- <p>Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p> -->
     <!-- <button><i><mat-icon>post_add</mat-icon></i>New</button> -->
-    <a routerLink="/pages/createpage" mat-fab extended color="primary" class="post_addbutton">
-        <mat-icon>post_add</mat-icon>
-        New page
-    </a>
+    <div>
+        <a routerLink="/posts/CreatePagePost" style="position: relative; left: 67%;background-color: transparent; color: black;" mat-fab extended class="post_addbutton">
+            <mat-icon>post_add</mat-icon>
+            Write a post
+        </a>
+        <a routerLink="/pages/createpage" style="background-color: transparent; color: black;" mat-fab extended class="post_addbutton">
+            <mat-icon>post_add</mat-icon>
+            Create page
+        </a>
+    </div>
 </div>
 <div *ngIf="condition; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
     <div class="list-items">
-        <div class="sub-items">
-            <img src="assets/test.png" alt="" srcset="" style="width: 8vw;
-            height: 18vh;
-            position: relative;
-            right: 32%;">
-        </div>
-        <div class="sub-items">
-            <img src="assets/nopages.png" alt="" srcset="" style="width: 8vw;
-            height: 18vh;
-            position: relative;
-            right: 32%;">
-        </div>
-        <!-- <div class="sub-items"></div>s -->
+        <!-- <ng-template > -->
+            <div class="sub-items" *ngFor="let item of MyPages"> 
+                <img src="assets/test.png" alt="" srcset="" style="width: 8vw;
+                height: 18vh;
+                position: relative;
+                right: 32%;">
+            </div>
+        <!-- </ng-template> -->
     </div>
 </ng-template>
 <ng-template #elseBlock>
