@@ -42,7 +42,7 @@ p{
     /* position: relative; */
     /* height: calc(100%-13vh); */
     display: grid;
-    grid-template-columns: 48% 50%;
+    grid-template-columns: 33% 33% 33%;
     gap: 0.5cm;
     width: 100%;
     max-width: 100%;
@@ -51,5 +51,5 @@ p{
     /* position: absolute; */
     height: auto;
     border: 1px solid red;
-
+    width: 100%;
 }

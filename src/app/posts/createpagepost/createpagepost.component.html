@@ -4,15 +4,16 @@
             <div>
                 <div class="body_container">
                     <div class="leftdiv">
-                        <p class="heading">Write your content </p>
-                        <p>
-                            <span class="helptext">Give a title to your post :</span>
-                            <input type="text" name="fieldname" formControlName="PostTitle" class="textfield" id="pagetitle"
-                                placeholder="write here.....">
+                        <p class="heading heading_c10">Write your content </p>
+                        <p style="width: 100%; margin-bottom: 0;">
+                            <mat-form-field appearance="outline" style="width: 100%;" formControlName="PostTitle">
+                                <mat-label>Give a title to your post</mat-label>
+                                <input type="text" matInput placeholder="write here.....">
+                            </mat-form-field>
                         </p>
-                        <p>
+                        <p style=" margin-bottom: 0;">
                             <span class="helptext">Choose tags :</span>
-                            <mat-form-field class="example-chip-list" class="chipsfield">
+                            <mat-form-field class="example-chip-list" class="chipsfield" appearance="outline">
                                 <mat-chip-grid #chipGrid aria-label="Tags">
                                     <mat-chip-row *ngFor="let fruit of fruits" (removed)="remove(fruit)">
                                         {{fruit}}
@@ -23,8 +24,10 @@
                                 </mat-chip-grid>
                                 <input placeholder="write here....." #fruitInput [formControl]="fruitCtrl"
                                     [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
-                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
-                                <mat-autocomplete class="test" #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="add($event)" />
+                                <mat-autocomplete class="test" #auto="matAutocomplete"
+                                    (optionSelected)="selected($event)">
                                     <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
                                         {{fruit}}
                                     </mat-option>
@@ -32,49 +35,43 @@
                             </mat-form-field>
                         </p>
                         <div style="display: flex; justify-content: space-between; width: 100%;">
-                            <p style="width: 40%;">
-                                <span class="helptext">Post Category :</span>
-                                <select name="selectedTeam" class="drpdwn" formControlName="MediaVisibilityState"
-                                    (change)="changeWebsite($event)">
-                                    <option>Choose here</option>
-                                    <option *ngFor="let item of categorylist" value="{{item.CategoryUUID}}">{{item.CategoryName}}
-                                    </option>
-                                </select>
+                            <p style="width: 48%; margin-bottom: 0;">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label>Post Category :</mat-label>
+                                    <mat-select formControlName="PostCategoryName">
+                                        <mat-option *ngFor="let item of categorylist" [value]="item.CategoryUUID">
+                                            {{item.CategoryName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </p>
-                            <p style="width: 40%;">
-                                <span class="helptext">Select Privacy :</span>
-                                <select name="selectedTeam" class="drpdwn" formControlName="MediaVisibilityState"
-                                    (change)="changeWebsite($event)">
-                                    <option>Choose here</option>
-                                    <option *ngFor="let item of PrivacyLists" value="{{item.PrivacyUUID}}">{{item.PrivacyType}}
-                                    </option>
-                                </select>
+                            <p style="width: 48%; margin-bottom: 0;">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label>Select Privacy :</mat-label>
+                                    <mat-select formControlName="MediaVisibilityState">
+                                        <mat-option *ngFor="let item of PrivacyLists" [value]="item.PrivacyUUID">
+                                            {{item.PrivacyType}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </p>
-                            
                         </div>
                         <div style="display: flex; justify-content: space-between; width: 100%;">
-                            <p style="width: 40%;">
-                                <!-- <span class="helptext">Choose your page :</span> -->
-                                <mat-form-field>
+                            <p style="width: 40%; margin-bottom: 0;">
+                                <mat-form-field appearance="outline" style="width: 100%;">
                                     <mat-label>Choose your page :</mat-label>
-                                    <mat-select>
-                                      <mat-option *ngFor="let item of Pagelists" [value]="item.PageUUID">
-                                        {{item.PageName}}
-                                      </mat-option>
+                                    <mat-select formControlName="PageUUID">
+                                        <mat-option *ngFor="let item of Pagelists" [value]="item.PageUUID">
+                                            {{item.PageName}}
+                                        </mat-option>
                                     </mat-select>
-                                  </mat-form-field>
-                                <!-- <select name="selectedTeam" class="drpdwn" formControlName="PageUUID"
-                                    (change)="changeWebsite($event)">
-                                    <option>Choose here</option>
-                                    <option *ngFor="let item of Pagelists" value="{{item.PageUUID}}">{{item.PageName}}
-                                    </option>
-                                </select> -->
+                                </mat-form-field>
                             </p>
-                            <p style="width: 58%;" class="textfield">
+                            <p style="width: 58%; margin-bottom: 0;" class="textfield">
                                 <span class="helptext">Choose your page icon :</span>
-                                <input mat-input type="file" #file name="" id="" formControlName="ProfileImagePath" 
+                                <input mat-input type="file" #file name="" id="" formControlName="ProfileImagePath"
                                     (change)="selectFile($event)">
-                            </p>    
+                            </p>
                         </div>
                     </div>
                     <div class="rightdiv">
@@ -83,7 +80,7 @@
                 </div>
             </div>
             <div class="ibc">
-                <quill-editor formControlName="PostDescription" [modules]="modules" ></quill-editor>
+                <quill-editor formControlName="PostDescription" [modules]="modules"></quill-editor>
             </div>
             <div>
                 <button type="submit" class="submit_btn" mat-stroked-button color="primary">Create post</button>
@@ -92,7 +89,7 @@
     </div>
 
     <div class="CL2">
-        <p>Top Posts  </p>
+        <p>Top Posts </p>
 
     </div>
 </div>

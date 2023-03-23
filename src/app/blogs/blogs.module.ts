@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { BlogsRoutingModule } from './blogs-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { WriteBlogComponent } from './write-blog/write-blog.component';
+import { BlogsComponent } from './blogs/blogs.component';
 
 
 @NgModule({
   declarations: [
-    WriteBlogComponent
+    WriteBlogComponent,
+    BlogsComponent
   ],
   imports: [
     BrowserModule,

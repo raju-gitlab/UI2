@@ -2,11 +2,14 @@
     <!-- <p>Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p> -->
     <!-- <button><i><mat-icon>post_add</mat-icon></i>New</button> -->
     <div>
-        <a routerLink="/posts/CreatePagePost" style="position: relative; left: 67%;background-color: transparent; color: black;" mat-fab extended class="post_addbutton">
+        <a routerLink="/posts/CreatePagePost"
+            style="position: relative; left: 67%;background-color: transparent; color: black;" mat-fab extended
+            class="post_addbutton">
             <mat-icon>post_add</mat-icon>
             Write a post
         </a>
-        <a routerLink="/pages/createpage" style="background-color: transparent; color: black;" mat-fab extended class="post_addbutton">
+        <a routerLink="/pages/createpage" style="background-color: transparent; color: black;" mat-fab extended
+            class="post_addbutton">
             <mat-icon>post_add</mat-icon>
             Create page
         </a>
@@ -15,14 +18,21 @@
 <div *ngIf="condition; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
     <div class="list-items">
-        <!-- <ng-template > -->
-            <div class="sub-items" *ngFor="let item of MyPages"> 
-                <img src="assets/test.png" alt="" srcset="" style="width: 8vw;
-                height: 18vh;
-                position: relative;
-                right: 32%;">
-            </div>
-        <!-- </ng-template> -->
+        <div class="sub-items" *ngFor="let item of MyPages">
+            <div class="card">
+                <!-- style="width: 18rem;" -->
+                <img class="card-img-top" src="https://images.unsplash.com/photo-1679041006302-cf5e318da08c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    {{item.PageName}}
+                  </h5>
+                  <p class="card-text">
+                    {{item.PageDescription}}
+                  </p>
+                  <a routerLink="/pages/PageByPageId/{{item.PageUUID}}" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+        </div>
     </div>
 </ng-template>
 <ng-template #elseBlock>

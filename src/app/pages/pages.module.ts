@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../services/data.service';
+import { PagebyidComponent } from './pagebyid/pagebyid.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DataService } from '../services/data.service';
     MyPagesComponent,
     AllPagesComponent,
     CreatePageComponent,
-    ManagePageComponent
+    ManagePageComponent,
+    PagebyidComponent
   ],
   imports: [
     CommonModule,

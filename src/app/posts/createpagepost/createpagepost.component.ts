@@ -38,7 +38,7 @@ export class CreatepagepostComponent {
     ProfileImagePath: new FormControl(null, Validators.required),
     MediaVisibilityState: new FormControl('', Validators.required),
     PostCategoryName: new FormControl('', Validators.required),
-    PostTags: new FormControl(''),
+    PostTags: new FormControl('', Validators.required),
     UserUUID: new FormControl(''),
     PageUUID : new FormControl('')
   });
@@ -188,11 +188,12 @@ export class CreatepagepostComponent {
   onFormSubmit() {
     this.PostForm.patchValue({ "UserUUID": sessionStorage.getItem("username")?.toString() });
     this.PostForm.patchValue({ "PostTags": this.tagsList });
-    this.dataservice.post("Posts/AddPost", this.PostForm.value).subscribe(data => {
+    this.dataservice.post("Posts/CreatePagePost", this.PostForm.value).subscribe(data => {
       console.log("Success");
     },
       error => {
         console.log("Error");
       });
+    console.log(this.PostForm.value);
   }
 }

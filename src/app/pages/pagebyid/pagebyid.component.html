@@ -1,0 +1,43 @@
+
+<div class="act_cards">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Add user </mat-card-title>
+            <br />
+            <br />
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="saveFileForm" (ngSubmit)="onExpSubmit()">
+                <!-- <p class="w_100">
+                    <mat-form-field appearance="outline" class="w_100">
+                        <mat-label>User Id</mat-label>
+                        <input matInput placeholder="Type userid or email" class="w_100">
+                    </mat-form-field>
+                </p>
+                <mat-form-field appearance="outline" class="w_100">
+                    <mat-label>Select role</mat-label>
+                    <mat-select>
+                        <mat-option value="primary">Primary</mat-option>
+                        <mat-option value="accent">Accent</mat-option>
+                        <mat-option value="warn">Warn</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-raised-button color="primary">Update</button> -->
+                <input type="text" formControlName="UserName" placeholder="User Name">
+                <input type='file' #logoInput (change)="onSelectFile($event)"> 
+                <button type="submit" class="button" class="btn btn-primary" color="primary">Save Details  
+                </button>  
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Your page moderators </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                <i>No Users</i>
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>

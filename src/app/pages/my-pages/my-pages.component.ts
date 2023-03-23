@@ -18,7 +18,6 @@ export class MyPagesComponent implements OnInit{
       
     })
    }
-
   createnewpage() {
     this.dialouge.open(CreatePageComponent);
   }
