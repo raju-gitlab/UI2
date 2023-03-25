@@ -9,20 +9,22 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-createpost',
   templateUrl: './createpost.component.html',
   styleUrls: ['./createpost.component.css']
 })
-export class CreatepostComponent {
+export class CreatepostComponent implements OnInit {
+  @ViewChild('logoInput', {
+    static: true
+  }) logoInput: any;
   modules = {}
   categorylist: any = null;
   isDisplay: string = "none";
   url: any = "assets/nopages.png";
   imagefile: any;
-  formdata = new FormData();
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl('');
   filteredFruits: Observable<string[]>;
@@ -30,21 +32,15 @@ export class CreatepostComponent {
   uniquetags: string[] = []; // not implemented in code
   allFruits: string[] = [];
   tagsList: string = "";
-  PostForm = new FormGroup({
-    PostTitle: new FormControl('', Validators.required),
-    PostDescription: new FormControl('', Validators.required),
-    ProfileImagePath: new FormControl(null, Validators.required),
-    MediaVisibilityState: new FormControl('', Validators.required),
-    PostCategoryName: new FormControl('', Validators.required),
-    PostTags: new FormControl(''),
-    UserUUID : new FormControl('')
-  });
+  fileToUpload: any = File;
+  imageUrl: string | undefined;
+  PostForm: any;
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | any;
   @ViewChild('file', {
     static: true
   }) file: any;
-  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder) {
+  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
     this.dataservice.get("Misc/ListTags").subscribe(data => {
       this.allFruits = data;
     });
@@ -74,6 +70,17 @@ export class CreatepostComponent {
     );
 
     this.allFruits.sort();
+  }
+  ngOnInit(): void {
+    this.PostForm = this.formBuilder.group({
+      PostTitle: new FormControl('', Validators.required),
+      PostDescription: new FormControl('', Validators.required),
+      ProfileImagePath: new FormControl(null, Validators.required),
+      MediaVisibilityState: new FormControl('', Validators.required),
+      PostCategoryName: new FormControl('', Validators.required),
+      PostTags: new FormControl(''),
+      UserUUID: new FormControl('')
+    });
   }
   binarySearch(value: string): void {
     var startIndex = 0,
@@ -139,7 +146,7 @@ export class CreatepostComponent {
     this.blured = true
   }
 
-  add(event: MatChipInputEvent): void { 
+  add(event: MatChipInputEvent): void {
     this.tagsList = "," + this.tagsList + event.value;
     const value = (event.value || '').trim();
     if (value) {
@@ -161,7 +168,6 @@ export class CreatepostComponent {
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.fruits.push(event.option.viewValue);
-    this.tagsList.concat("," + event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
     // this.binarySearch(event.option.viewValue);
@@ -173,13 +179,50 @@ export class CreatepostComponent {
   }
 
   onFormSubmit() {
-    this.PostForm.patchValue({"UserUUID" : sessionStorage.getItem("username")?.toString()});
-    this.PostForm.patchValue({"PostTags" : this.tagsList});
-    this.dataservice.post("Posts/AddPost", this.PostForm.value).subscribe(data => {
-      console.log("Success");
-    },
-      error => {
-        console.log("Error");
-      });
+    let url = 'https://localhost:44379/';
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    const httpOptions = {
+      headers: headers
+    };
+    let uId: any = sessionStorage.getItem("username")?.toString();
+    let formData = new FormData();
+    formData.append('UploadFile', this.logoInput.nativeElement.files[0]);
+    formData.append('PostTitle', this.PostForm.value.PostTitle);
+    formData.append('PostDescription', this.PostForm.value.PostDescription);
+    formData.append('MediaVisibilityState', this.PostForm.value.MediaVisibilityState);
+    formData.append('PostCategoryName', this.PostForm.value.PostCategoryName);
+    formData.append('UniqueTags', this.uniquetags.toLocaleString());
+    formData.append('AllTags', this.fruits.toLocaleString());
+    formData.append('UserUUID', uId);
+    console.log(formData);
+    this.http.post(url + '/api/Posts/AddPost', formData, httpOptions).subscribe(data => {
+      if(data != null) {
+        this._snackBar.open('Posted', 'dismiss', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 1* 1000,
+          panelClass: ['warning']
+        });
+      }
+      else {
+        this._snackBar.open('Error', 'dismiss', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 1* 1000,
+          panelClass: ['warning']
+        });
+      }
+    }); 
+  }
+  onSelectFile(event: any) {
+    let file: FileList = event.target.files;
+    this.fileToUpload = file.item(0);
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.url = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+    console.log(this.logoInput.nativeElement.files[0]);
   }
 }

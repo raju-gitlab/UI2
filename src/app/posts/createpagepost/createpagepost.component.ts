@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { DataService } from 'src/app/services/data.service';
 
@@ -16,7 +15,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   templateUrl: './createpagepost.component.html',
   styleUrls: ['./createpagepost.component.css']
 })
-export class CreatepagepostComponent {
+export class CreatepagepostComponent implements OnInit {
   modules = {};
   Pagelists : any;
   PrivacyLists : any;
@@ -32,17 +31,12 @@ export class CreatepagepostComponent {
   uniquetags: string[] = []; // not implemented in code
   allFruits: string[] = [];
   tagsList: string = "";
-  PostForm = new FormGroup({
-    PostTitle: new FormControl('', Validators.required),
-    PostDescription: new FormControl('', Validators.required),
-    ProfileImagePath: new FormControl(null, Validators.required),
-    MediaVisibilityState: new FormControl('', Validators.required),
-    PostCategoryName: new FormControl('', Validators.required),
-    PostTags: new FormControl('', Validators.required),
-    UserUUID: new FormControl(''),
-    PageUUID : new FormControl('')
-  });
+  PostForm : any;
+  fileToUpload: any = File;
 
+  @ViewChild('logoInput', {
+    static: true
+  }) logoInput: any;
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | any;
   @ViewChild('file', {
     static: true
@@ -196,4 +190,26 @@ export class CreatepagepostComponent {
       });
     console.log(this.PostForm.value);
   }
+  ngOnInit(): void {
+      this.PostForm = this.formBuilder.group ({
+        PostTitle: new FormControl('', Validators.required),
+        PostDescription: new FormControl('', Validators.required),
+        ProfileImagePath: new FormControl(null, Validators.required),
+        MediaVisibilityState: new FormControl('', Validators.required),
+        PostCategoryName: new FormControl('', Validators.required),
+        PostTags: new FormControl('', Validators.required),
+        UserUUID: new FormControl(''),
+        PageUUID : new FormControl('')
+      });
+  }
+  onSelectFile(event: any) {
+    let file: FileList = event.target.files;
+    this.fileToUpload = file.item(0);
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.url = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+    console.log(this.logoInput.nativeElement.files[0]);
+  }                                                                                                                                                                           
 }

@@ -1,0 +1,22 @@
+.input_fld {
+    width: 100%;
+    max-width: 94%;
+    height: 10vh;
+    border-radius: 15px;
+    border: 1px solid;
+    margin: 20px;
+    text-indent: 22px;
+    outline: none;
+}
+.btn1 {
+    width: 26%;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -24%);
+    outline: none;
+    background: white;
+    border: none;
+    color: black;
+}

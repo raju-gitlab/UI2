@@ -30,7 +30,7 @@ export class DataService {
     const httpHeaders = new HttpHeaders({
       'Accept':'*/*','apptype': 'Web', 
       'Cache-Control': 'no-cache', 
-      'Content-Type': 'multipart/form-data; charset=utf-8'
+      'Content-Type': 'application/json'
     });
 
     return httpHeaders;

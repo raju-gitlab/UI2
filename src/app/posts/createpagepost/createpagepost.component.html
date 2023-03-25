@@ -69,8 +69,8 @@
                             </p>
                             <p style="width: 58%; margin-bottom: 0;" class="textfield">
                                 <span class="helptext">Choose your page icon :</span>
-                                <input mat-input type="file" #file name="" id="" formControlName="ProfileImagePath"
-                                    (change)="selectFile($event)">
+                                <input mat-input type="file" name="" id="" formControlName="ProfileImagePath"
+                                #logoInput (change)="onSelectFile($event)">
                             </p>
                         </div>
                     </div>
