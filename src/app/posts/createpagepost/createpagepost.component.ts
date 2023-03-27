@@ -8,7 +8,8 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-createpagepost',
@@ -41,9 +42,10 @@ export class CreatepagepostComponent implements OnInit {
   @ViewChild('file', {
     static: true
   }) file: any;
-  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder) {
+  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder, private _snackBar : MatSnackBar) {
     this.dataservice.get("Misc/ListTags").subscribe(data => {
       this.allFruits = data;
+      
     });
     this.dataservice.get("Misc/ListCategories").subscribe(data => {
       this.categorylist = data;
@@ -180,16 +182,54 @@ export class CreatepagepostComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.PostForm.patchValue({ "UserUUID": sessionStorage.getItem("username")?.toString() });
-    this.PostForm.patchValue({ "PostTags": this.tagsList });
-    this.dataservice.post("Posts/CreatePagePost", this.PostForm.value).subscribe(data => {
-      console.log("Success");
-    },
-      error => {
-        console.log("Error");
-      });
-    console.log(this.PostForm.value);
+    let url = 'https://localhost:44379/';
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    const httpOptions = {
+      headers: headers
+    };
+    let uId: any = sessionStorage.getItem("username")?.toString();
+    let formData = new FormData();
+    formData.append('UploadFile', this.logoInput.nativeElement.files[0]);
+    formData.append('PostTitle', this.PostForm.value.PostTitle);
+    formData.append('PostDescription', this.PostForm.value.PostDescription);
+    formData.append('MediaVisibilityState', this.PostForm.value.MediaVisibilityState);
+    formData.append('PostCategoryName', this.PostForm.value.PostCategoryName);
+    formData.append('UniqueTags', this.uniquetags.toLocaleString());
+    formData.append('AllTags', this.fruits.toLocaleString());
+    formData.append('UserUUID', uId);
+    formData.append('PageUUID', this.PostForm.value.PageUUID);
+    console.log(formData);
+    this.http.post(url + 'api/Posts/CreatePagePost', formData, httpOptions).subscribe(data => {
+      if(data != null) {
+        this._snackBar.open('Posted', 'dismiss', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 1* 1000,
+          panelClass: ['warning']
+        });
+      }
+      else {
+        this._snackBar.open('Error', 'dismiss', {
+          horizontalPosition: 'end',
+          verticalPosition: 'top',
+          duration: 1* 1000,
+          panelClass: ['warning']
+        });
+      }
+    });
+    
   }
+  onSelectFile(event: any) {
+    let file: FileList = event.target.files;
+    this.fileToUpload = file.item(0);
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.url = event.target.result;
+    }
+    reader.readAsDataURL(this.fileToUpload);
+    console.log(this.logoInput.nativeElement.files[0]);
+  }    
   ngOnInit(): void {
       this.PostForm = this.formBuilder.group ({
         PostTitle: new FormControl('', Validators.required),
@@ -201,15 +241,5 @@ export class CreatepagepostComponent implements OnInit {
         UserUUID: new FormControl(''),
         PageUUID : new FormControl('')
       });
-  }
-  onSelectFile(event: any) {
-    let file: FileList = event.target.files;
-    this.fileToUpload = file.item(0);
-    var reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.url = event.target.result;
-    }
-    reader.readAsDataURL(this.fileToUpload);
-    console.log(this.logoInput.nativeElement.files[0]);
-  }                                                                                                                                                                           
+  }                                                                                                                                                                   
 }

@@ -68,7 +68,6 @@ export class CreatepostComponent implements OnInit {
       startWith(null),
       map((fruit: string | null) => (fruit ? this._filter(fruit) : this.allFruits.slice())),
     );
-
     this.allFruits.sort();
   }
   ngOnInit(): void {
@@ -94,8 +93,14 @@ export class CreatepostComponent implements OnInit {
       }
       middle = Math.floor((stopIndex + startIndex) / 2);
     }
-    (this.allFruits[middle].toLowerCase() != value.toLowerCase()) ? this.uniquetags.push(value) : console.log("unique");
-    ;
+    if (this.allFruits[middle].toLowerCase() != value.toLowerCase()) 
+    {
+      window.alert("unique");
+      // this.uniquetags.push(value);
+    }  
+    else {
+      window.alert("finded");
+    } 
   }
   changeWebsite(e: any) {
     if (e.target.value == "59baac6b-9eb3-11ed-b56f-8c1645e01566") {
@@ -170,7 +175,7 @@ export class CreatepostComponent implements OnInit {
     this.fruits.push(event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
-    // this.binarySearch(event.option.viewValue);
+    this.binarySearch(event.option.viewValue);
   }
 
   private _filter(value: string): string[] {
