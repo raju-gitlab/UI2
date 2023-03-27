@@ -122,8 +122,6 @@ export class CreatepostComponent implements OnInit {
       this.url = reader.result;
     }
   }
-
-
   blured = false
   focused = false
 
