@@ -153,7 +153,12 @@ export class CreatepagepostComponent implements OnInit {
     const value = (event.value || '').trim();
     if (value) {
       this.fruits.push(value);
-      this.binarySearch(value);
+    }
+
+    const result = this.allFruits.findIndex(item => event.value.toLowerCase() === item.toLowerCase());
+    const tresult = this.uniquetags.findIndex(item => event.value.toLowerCase() === item.toLowerCase());
+    if ((Number(result) == -1) && (Number(tresult) == -1)) {
+      this.uniquetags.push(event.value);
     }
 
     event.chipInput!.clear();
@@ -173,7 +178,11 @@ export class CreatepagepostComponent implements OnInit {
     this.tagsList.concat("," + event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
-    // this.binarySearch(event.option.viewValue);
+    const result = this.allFruits.findIndex(item => event.option.viewValue.toLowerCase() === item.toLowerCase());
+    const tresult = this.uniquetags.findIndex(item => event.option.viewValue.toLowerCase() === item.toLowerCase());
+    if ((Number(result) == -1) && (Number(tresult) == -1)) {
+      this.uniquetags.push(event.option.viewValue);
+    }
   }
 
   private _filter(value: string): string[] {

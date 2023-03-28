@@ -81,27 +81,7 @@ export class CreatepostComponent implements OnInit {
       UserUUID: new FormControl('')
     });
   }
-  binarySearch(value: string): void {
-    var startIndex = 0,
-      stopIndex = this.allFruits.length - 1,
-      middle = Math.floor((stopIndex + startIndex) / 2);
-    while (this.allFruits[middle].toLowerCase() != value.toLowerCase() && startIndex < stopIndex) {
-      if (value.toLowerCase() < this.allFruits[middle].toLowerCase()) {
-        stopIndex = middle - 1;
-      } else if (value.toLowerCase() > this.allFruits[middle].toLowerCase()) {
-        startIndex = middle + 1;
-      }
-      middle = Math.floor((stopIndex + startIndex) / 2);
-    }
-    if (this.allFruits[middle].toLowerCase() != value.toLowerCase()) 
-    {
-      window.alert("unique");
-      // this.uniquetags.push(value);
-    }  
-    else {
-      window.alert("finded");
-    } 
-  }
+
   changeWebsite(e: any) {
     if (e.target.value == "59baac6b-9eb3-11ed-b56f-8c1645e01566") {
       this.isDisplay = "block";
@@ -154,9 +134,13 @@ export class CreatepostComponent implements OnInit {
     const value = (event.value || '').trim();
     if (value) {
       this.fruits.push(value);
-      this.binarySearch(value);
     }
-
+    
+    const result = this.allFruits.findIndex(item => event.value.toLowerCase() === item.toLowerCase());
+    const tresult = this.uniquetags.findIndex(item => event.value.toLowerCase() === item.toLowerCase());
+    if ((Number(result) == -1) && (Number(tresult) == -1)) {
+      this.uniquetags.push(event.value);
+    }
     event.chipInput!.clear();
     this.fruitCtrl.setValue(null);
   }
@@ -173,7 +157,11 @@ export class CreatepostComponent implements OnInit {
     this.fruits.push(event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
-    this.binarySearch(event.option.viewValue);
+    const result = this.allFruits.findIndex(item => event.option.viewValue.toLowerCase() === item.toLowerCase());
+    const tresult = this.uniquetags.findIndex(item => event.option.viewValue.toLowerCase() === item.toLowerCase());
+    if ((Number(result) == -1) && (Number(tresult) == -1)) {
+      this.uniquetags.push(event.option.viewValue);
+    }
   }
 
   private _filter(value: string): string[] {
@@ -216,7 +204,7 @@ export class CreatepostComponent implements OnInit {
           panelClass: ['warning']
         });
       }
-    }); 
+    });
   }
   onSelectFile(event: any) {
     let file: FileList = event.target.files;

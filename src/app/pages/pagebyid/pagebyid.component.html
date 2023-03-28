@@ -14,14 +14,16 @@
                         <input matInput placeholder="Type userid or email" class="w_100">
                     </mat-form-field>
                 </p>
-                <mat-form-field appearance="outline" class="w_100">
-                    <mat-label>Select role</mat-label>
-                    <mat-select>
-                        <mat-option value="primary">Primary</mat-option>
-                        <mat-option value="accent">Accent</mat-option>
-                        <mat-option value="warn">Warn</mat-option>
-                    </mat-select>
-                </mat-form-field>
+                <p style="margin-bottom: 0;" class="w_100">
+                        <mat-form-field appearance="outline" style="width: 100%;">
+                            <mat-label>Select Role :</mat-label>
+                            <mat-select formControlName="PostCategoryName">
+                                <mat-option *ngFor="let item of RolesList" [value]="item.RoleId">
+                                    {{item.RoleName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </p>
                 <button mat-raised-button color="primary">Update</button>
                 
             </form>
