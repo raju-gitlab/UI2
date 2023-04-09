@@ -25,6 +25,9 @@ export class DataService {
   {
     return this.http.post(this.APIURL.toString() + urlParam,data,{'headers' : this.TokenHeaders()});
   }
+  put(urlParam : string , data : any) {
+    return this.http.put(this.APIURL.toString() + urlParam,data,{'headers' : this.TokenHeaders()});
+  }
   
   public headers() {
     const httpHeaders = new HttpHeaders({

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { C } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-create-page',
@@ -9,23 +11,29 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./create-page.component.css']
 })
 export class CreatePageComponent implements OnInit {
-  categorylist : any= null;
-  privacylist : any= null;
-  isDisplay : string = "none";
+  categorylist: any = null;
+  privacylist: any = null;
+  isDisplay: string = "none";
   url: any = "assets/nopages.png";
-  imagefile : any;
+  imagefile: any;
   formdata = new FormData();
-    
+  file: any;
+
   pageform = new FormGroup({
     PageName: new FormControl('', Validators.required),
     PageDescription: new FormControl('', Validators.required),
-    ProfileImagePath : new FormControl(null, Validators.required),
-    PrivacyType : new FormControl('',Validators.required),
-    CategoryType : new FormControl('', Validators.required)
+    ProfileImagePath: new FormControl(null, Validators.required),
+    PrivacyType: new FormControl('', Validators.required),
+    CategoryType: new FormControl('', Validators.required)
   });
-  
-  public constructor(private dataservice : DataService, private router: Router) {
-    if(!sessionStorage.getItem("username")?.toString()) {
+
+  uploadImageform = new FormGroup({
+    ImagePath : new FormControl(''),
+    PageGuid : new FormControl('')
+  });
+
+  public constructor(private dataservice: DataService, private router: Router, private fireStorage: AngularFireStorage) {
+    if (!sessionStorage.getItem("username")?.toString()) {
       this.router.navigateByUrl("login");
     }
     this.dataservice.get("Misc/ListCategories").subscribe(data => {
@@ -36,7 +44,7 @@ export class CreatePageComponent implements OnInit {
     });
   }
 
-  changeWebsite(e : any) {
+  changeWebsite(e: any) {
     if (e.target.value == "59baac6b-9eb3-11ed-b56f-8c1645e01566") {
       this.isDisplay = "block";
     }
@@ -45,21 +53,39 @@ export class CreatePageComponent implements OnInit {
     }
   }
 
-  selectFile(event: any) {
-    console.log(event.target.files[0]);
-    let file = event.target.files[0];
+  async selectFile(event: any) {
+    this.file = event.target.files[0];
     var reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
-		
-		reader.onload = (_event) => {
-			this.url = reader.result; 
-		}
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = (_event) => {
+      this.url = reader.result;
+    }
   }
 
-  onFormSubmit() {
+  async onFormSubmit() {
+    debugger;
     console.log(this.pageform.value);
-    this.dataservice.authenticatedpost("page/CreatePage", this.pageform.value).subscribe(data => {
-      console.log(data);
+    this.dataservice.authenticatedpost("page/CreatePage", this.pageform.value).subscribe(async data => {
+      if(this.file) {
+        const path = `uploads1/${this.file.name}`;
+        const uploadTask = await this.fireStorage.upload(path, this.file);
+        const url = await uploadTask.ref.getDownloadURL();
+        if(url.length > 0 || url != null || url != undefined) {
+          this.uploadImageform.patchValue({ImagePath : url.toString(), PageGuid : data.toString()});
+          console.log(this.uploadImageform.value);
+          this.dataservice.put("page/UploadLogo", this.uploadImageform.value).subscribe(data => {
+            if(data.toString().toLowerCase() == "Success".toString().toLowerCase()) {
+              console.log("done");
+            }
+            else {
+              console.log("Not Done");
+            }
+          },
+          (error) => {
+            console.log(error);
+          })
+        }
+      }
     });
   }
   ngOnInit(): void { }

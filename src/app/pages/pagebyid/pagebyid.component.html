@@ -11,13 +11,13 @@
                 <p class="w_100">
                     <mat-form-field appearance="outline" class="w_100">
                         <mat-label>User Id</mat-label>
-                        <input matInput placeholder="Type userid or email" class="w_100">
+                        <input matInput formControlName="UserId" placeholder="Type userid or email" class="w_100">
                     </mat-form-field>
                 </p>
                 <p style="margin-bottom: 0;" class="w_100">
                         <mat-form-field appearance="outline" style="width: 100%;">
                             <mat-label>Select Role :</mat-label>
-                            <mat-select formControlName="PostCategoryName">
+                            <mat-select formControlName="RoleName">
                                 <mat-option *ngFor="let item of RolesList" [value]="item.RoleId">
                                     {{item.RoleName}}
                                 </mat-option>

@@ -11,7 +11,9 @@ import { MaterialModule } from '../material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../services/data.service';
 import { PagebyidComponent } from './pagebyid/pagebyid.component';
-
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFireStorageModule} from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { PagebyidComponent } from './pagebyid/pagebyid.component';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule
   ],
   providers: [DataService]
 })

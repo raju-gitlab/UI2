@@ -64,7 +64,13 @@
 
     <div class="CL2">
         <p>Top Posts  </p>
-
+        <mat-card *ngFor="let item of TopPosts">
+            <mat-card-content>
+                <p>{{item.PostTitle}}/p>
+                <p>{{item.PostDescription}}>
+            </mat-card-content>
+          </mat-card>
+          
     </div>
 </div>
 

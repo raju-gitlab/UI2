@@ -35,6 +35,7 @@ export class CreatepostComponent implements OnInit {
   fileToUpload: any = File;
   imageUrl: string | undefined;
   PostForm: any;
+  TopPosts : any;
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | any;
   @ViewChild('file', {
@@ -47,6 +48,10 @@ export class CreatepostComponent implements OnInit {
     this.dataservice.get("Misc/ListCategories").subscribe(data => {
       this.categorylist = data;
     });
+    this.dataservice.get("Posts/TopPosts?UserId="+sessionStorage.getItem("username")?.toString()).subscribe(data => {
+      console.log(data);
+      this.TopPosts = data;
+    })
     this.modules = {
       'toolbar': [
         ['bold', 'italic', 'underline', 'strike'],
