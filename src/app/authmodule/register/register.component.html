@@ -16,27 +16,25 @@
             <div class="form login">
                 <span class="title">Register</span>
 
-                <form action="#" method="post">
+                <form [formGroup]="registerForm" (ngSubmit)="onExpSubmit()">
                     <div class="input-field">
-                        <input type="text" placeholder="First Name" required>
+                        <input type="text" placeholder="First Name" formControlName="FirstName" required>
                         <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="text" placeholder="Last Name" required>
+                        <input type="text" placeholder="Last Name" formControlName="LastName" required>
                         <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="email" placeholder="Enter your email" required>
+                        <input type="email" placeholder="Enter your email" formControlName="Email" required>
                         <i class="uil uil-envelope icon"></i>
                     </div>
-
                     <div class="input-field">
-                        <input type="text" placeholder="Contact Number" required>
+                        <input type="number" placeholder="Contact Number" min="10" max="10" formControlName="ContactNumber" required>
                         <i class="uil uil-phone"></i>
                     </div>
-
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Create a password" required>
+                        <input type="password" class="password" placeholder="Create a password" formControlName="Password" required>
                         <i class="uil uil-lock icon"></i>
                     </div>
                     <div class="input-field">
@@ -44,19 +42,10 @@
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
-                    
-                    <div class="checkbox-text">
-                        <div class="checkbox-content">
-                            <input type="checkbox" id="termCon">
-                            <label for="termCon" class="text">I accepted all terms and conditions</label>
-                        </div>
-                    </div>
-
                     <div class="input-field button">
-                        <input type="button" value="Signup">
+                        <input type="submit" value="Signup">
                     </div>
                 </form>
-
                 <div class="login-signup">
                     <span class="text">Not a member?
                         <a href="#" class="text signup-link">Signup Now</a>

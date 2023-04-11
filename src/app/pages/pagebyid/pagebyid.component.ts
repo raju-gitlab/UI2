@@ -10,8 +10,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class PagebyidComponent implements OnInit {
     saveFileForm = new FormGroup({
-        RoleName: new FormControl('', Validators.required),
-        UserId: new FormControl('', Validators.required)
+        RoleId: new FormControl('', Validators.required),
+        UserId: new FormControl('', Validators.required),
+        PageId  : new FormControl('', Validators.required)
     });
     TopPosts: any;
     PageDetails: any;
@@ -27,18 +28,24 @@ export class PagebyidComponent implements OnInit {
         });
         this.dataservice.get("Page/GetRolesList").subscribe(data => {
             this.RolesList = data;
-        })
+        });
+        this.dataservice.get("Page/PageUsers?PageId=" + this.route.snapshot.paramMap.get('PageId')).subscribe(data=> {
+            console.log(data);
+        },
+        error => {
+            console.log(error);
+        });
     }
     ngOnInit(): void {
-
+        this.saveFileForm.patchValue({"PageId" : this.route.snapshot.paramMap.get('PageId')});
     }
 
     onExpSubmit() {
-        this.dataservice.authenticatedget("/").subscribe(data => {
-
+        this.dataservice.put("Page/UpdatePageUsers", this.saveFileForm.value).subscribe(data => {
+            console.log(data);
         },
-            error => {
-
-            })
+        error => {
+            console.log(error);
+        })
     }
 }
