@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { C } from '@angular/cdk/keycodes';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-page',
@@ -32,7 +33,7 @@ export class CreatePageComponent implements OnInit {
     PageGuid : new FormControl('')
   });
 
-  public constructor(private dataservice: DataService, private router: Router, private fireStorage: AngularFireStorage) {
+  public constructor(private dataservice: DataService, private router: Router, private fireStorage: AngularFireStorage, private toaster : MatSnackBar) {
     if (!sessionStorage.getItem("username")?.toString()) {
       this.router.navigateByUrl("login");
     }
@@ -75,6 +76,7 @@ export class CreatePageComponent implements OnInit {
           console.log(this.uploadImageform.value);
           this.dataservice.put("page/UploadLogo", this.uploadImageform.value).subscribe(data => {
             if(data.toString().toLowerCase() == "Success".toString().toLowerCase()) {
+              this.toaster.open("Posted", "close");
               console.log("done");
             }
             else {

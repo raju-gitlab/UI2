@@ -17,6 +17,7 @@ export class PagebyidComponent implements OnInit {
     TopPosts: any;
     PageDetails: any;
     RolesList: any;
+    PageUsers : any;
     constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private dataservice: DataService,) {
         this.dataservice.authenticatedget("Posts/PagePosts?UserId=" + sessionStorage.getItem("username") + "&PageId=" + this.route.snapshot.paramMap.get('PageId')).subscribe(data => {
             this.TopPosts = data;
@@ -30,7 +31,7 @@ export class PagebyidComponent implements OnInit {
             this.RolesList = data;
         });
         this.dataservice.get("Page/PageUsers?PageId=" + this.route.snapshot.paramMap.get('PageId')).subscribe(data=> {
-            console.log(data);
+            this.PageUsers = data;
         },
         error => {
             console.log(error);

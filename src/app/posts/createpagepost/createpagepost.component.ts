@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-createpagepost',
@@ -34,6 +35,10 @@ export class CreatepagepostComponent implements OnInit {
   tagsList: string = "";
   PostForm : any;
   fileToUpload: any = File;
+  updateImageForm = new FormGroup({
+    FilePath : new FormControl(''),
+    PostUUID : new FormControl('')
+  });
 
   @ViewChild('logoInput', {
     static: true
@@ -42,7 +47,7 @@ export class CreatepagepostComponent implements OnInit {
   @ViewChild('file', {
     static: true
   }) file: any;
-  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder, private _snackBar : MatSnackBar) {
+  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder, private _snackBar : MatSnackBar, private firestorage : AngularFireStorage) {
     this.dataservice.get("Misc/ListTags").subscribe(data => {
       this.allFruits = data;
       
@@ -84,21 +89,7 @@ export class CreatepagepostComponent implements OnInit {
 
     this.allFruits.sort();
   }
-  binarySearch(value: string): void {
-    var startIndex = 0,
-      stopIndex = this.allFruits.length - 1,
-      middle = Math.floor((stopIndex + startIndex) / 2);
-    while (this.allFruits[middle].toLowerCase() != value.toLowerCase() && startIndex < stopIndex) {
-      if (value.toLowerCase() < this.allFruits[middle].toLowerCase()) {
-        stopIndex = middle - 1;
-      } else if (value.toLowerCase() > this.allFruits[middle].toLowerCase()) {
-        startIndex = middle + 1;
-      }
-      middle = Math.floor((stopIndex + startIndex) / 2);
-    }
-    (this.allFruits[middle].toLowerCase() != value.toLowerCase()) ? this.uniquetags.push(value) : console.log("unique");
-    ;
-  }
+  
   changeWebsite(e: any) {
     if (e.target.value == "59baac6b-9eb3-11ed-b56f-8c1645e01566") {
       this.isDisplay = "block";
@@ -119,7 +110,6 @@ export class CreatepagepostComponent implements OnInit {
       this.url = reader.result;
     }
   }
-
 
   blured = false
   focused = false
@@ -199,7 +189,7 @@ export class CreatepagepostComponent implements OnInit {
     };
     let uId: any = sessionStorage.getItem("username")?.toString();
     let formData = new FormData();
-    formData.append('UploadFile', this.logoInput.nativeElement.files[0]);
+    formData.append('UploadFile', "");
     formData.append('PostTitle', this.PostForm.value.PostTitle);
     formData.append('PostDescription', this.PostForm.value.PostDescription);
     formData.append('MediaVisibilityState', this.PostForm.value.MediaVisibilityState);
@@ -209,14 +199,50 @@ export class CreatepagepostComponent implements OnInit {
     formData.append('UserUUID', uId);
     formData.append('PageUUID', this.PostForm.value.PageUUID);
     console.log(formData);
-    this.http.post(url + 'api/Posts/CreatePagePost', formData, httpOptions).subscribe(data => {
+    this.http.post(url + 'api/Posts/CreatePagePost', formData, httpOptions).subscribe(async data => {
       if(data != null) {
-        this._snackBar.open('Posted', 'dismiss', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          duration: 1* 1000,
-          panelClass: ['warning']
-        });
+        if(this.url) {
+          const path = `PagePosts/${this.logoInput.nativeElement.files[0].name}`;
+          const uploadTask = await this.firestorage.upload(path, this.logoInput.nativeElement.files[0]);
+          const url = await uploadTask.ref.getDownloadURL();
+          if (url.length > 0 || url != null || url != undefined) {
+            this.updateImageForm.patchValue({"FilePath" : url});
+            this.updateImageForm.patchValue({"PostUUID" : data.toString()});
+            this.dataservice.put("Posts/UpdatePagePostImage",this.updateImageForm.value).subscribe(data => {
+              this._snackBar.open('Posted!', 'dismiss', {
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+                duration: 1* 1000,
+                panelClass: ['warning']
+              });
+            },
+            error => {
+              this._snackBar.open('Posted but file not uploaded!', 'dismiss', {
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+                duration: 1* 1000,
+                panelClass: ['warning']
+              });
+            });
+            
+          }
+          else{
+            this._snackBar.open('Posted but file not uploaded', 'dismiss', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              duration: 1* 1000,
+              panelClass: ['warning']
+            });
+          }
+        }
+        else {
+          this._snackBar.open('Posted', 'dismiss', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 1* 1000,
+            panelClass: ['warning']
+          });
+        }
       }
       else {
         this._snackBar.open('Error', 'dismiss', {
@@ -226,6 +252,14 @@ export class CreatepagepostComponent implements OnInit {
           panelClass: ['warning']
         });
       }
+    },
+    error => {
+      this._snackBar.open('Posted but file not uploaded', 'dismiss', {
+        horizontalPosition: 'end',
+        verticalPosition: 'top',
+        duration: 1* 1000,
+        panelClass: ['warning']
+      });
     });
     
   }

@@ -10,6 +10,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-createpost',
@@ -35,20 +36,24 @@ export class CreatepostComponent implements OnInit {
   fileToUpload: any = File;
   imageUrl: string | undefined;
   PostForm: any;
-  TopPosts : any;
+  TopPosts: any;
+  updateImageForm = new FormGroup({
+    FilePath : new FormControl(''),
+    PostUUID : new FormControl('')
+  });
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement> | any;
   @ViewChild('file', {
     static: true
   }) file: any;
-  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
+  public constructor(private dataservice: DataService, private http: HttpClient, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private fireStorage: AngularFireStorage) {
     this.dataservice.get("Misc/ListTags").subscribe(data => {
       this.allFruits = data;
     });
     this.dataservice.get("Misc/ListCategories").subscribe(data => {
       this.categorylist = data;
     });
-    this.dataservice.get("Posts/TopPosts?UserId="+sessionStorage.getItem("username")?.toString()).subscribe(data => {
+    this.dataservice.get("Posts/TopPosts?UserId=" + sessionStorage.getItem("username")?.toString()).subscribe(data => {
       console.log(data);
       this.TopPosts = data;
     })
@@ -140,7 +145,7 @@ export class CreatepostComponent implements OnInit {
     if (value) {
       this.fruits.push(value);
     }
-    
+
     const result = this.allFruits.findIndex(item => event.value.toLowerCase() === item.toLowerCase());
     const tresult = this.uniquetags.findIndex(item => event.value.toLowerCase() === item.toLowerCase());
     if ((Number(result) == -1) && (Number(tresult) == -1)) {
@@ -183,7 +188,7 @@ export class CreatepostComponent implements OnInit {
     };
     let uId: any = sessionStorage.getItem("username")?.toString();
     let formData = new FormData();
-    formData.append('UploadFile', this.logoInput.nativeElement.files[0]);
+    formData.append('UploadFile', "");
     formData.append('PostTitle', this.PostForm.value.PostTitle);
     formData.append('PostDescription', this.PostForm.value.PostDescription);
     formData.append('MediaVisibilityState', this.PostForm.value.MediaVisibilityState);
@@ -192,20 +197,55 @@ export class CreatepostComponent implements OnInit {
     formData.append('AllTags', this.fruits.toLocaleString());
     formData.append('UserUUID', uId);
     console.log(formData);
-    this.http.post(url + '/api/Posts/AddPost', formData, httpOptions).subscribe(data => {
-      if(data != null) {
-        this._snackBar.open('Posted', 'dismiss', {
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          duration: 1* 1000,
-          panelClass: ['warning']
-        });
+    this.http.post(url + '/api/Posts/AddPost', formData, httpOptions).subscribe(async data => {
+      if (data != null) {
+        if (this.url) {
+          const path = `Posts/${this.logoInput.nativeElement.files[0].name}`;
+          const uploadTask = await this.fireStorage.upload(path, this.logoInput.nativeElement.files[0]);
+          const url = await uploadTask.ref.getDownloadURL();
+          if (url.length > 0 || url != null || url != undefined) {
+            this.updateImageForm.patchValue({"FilePath" : url});
+            this.updateImageForm.patchValue({"PostUUID" : data.toString()});
+            this.dataservice.put("Posts/UpdatePostImage",this.updateImageForm.value).subscribe(data => {
+              this._snackBar.open('Posted!', 'dismiss', {
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+                duration: 1* 1000,
+                panelClass: ['warning']
+              });
+            },
+            error => {
+              this._snackBar.open('Posted but file not uploaded', 'dismiss', {
+                horizontalPosition: 'end',
+                verticalPosition: 'top',
+                duration: 1* 1000,
+                panelClass: ['warning']
+              });
+            });
+          }
+          else {
+            this._snackBar.open('Posted but file not uploaded', 'dismiss', {
+              horizontalPosition: 'end',
+              verticalPosition: 'top',
+              duration: 1* 1000,
+              panelClass: ['warning']
+            });
+          }
+        }
+        else {
+          this._snackBar.open('Posted', 'dismiss', {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 1 * 1000,
+            panelClass: ['warning']
+          });
+        }
       }
       else {
         this._snackBar.open('Error', 'dismiss', {
           horizontalPosition: 'end',
           verticalPosition: 'top',
-          duration: 1* 1000,
+          duration: 1 * 1000,
           panelClass: ['warning']
         });
       }
