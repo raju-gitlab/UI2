@@ -64,7 +64,6 @@ export class CreatePageComponent implements OnInit {
   }
 
   async onFormSubmit() {
-    debugger;
     console.log(this.pageform.value);
     this.dataservice.authenticatedpost("page/CreatePage", this.pageform.value).subscribe(async data => {
       if(this.file) {
@@ -76,15 +75,24 @@ export class CreatePageComponent implements OnInit {
           console.log(this.uploadImageform.value);
           this.dataservice.put("page/UploadLogo", this.uploadImageform.value).subscribe(data => {
             if(data.toString().toLowerCase() == "Success".toString().toLowerCase()) {
-              this.toaster.open("Posted", "close");
-              console.log("done");
+              this.toaster.open("Posted", "close", {
+                horizontalPosition: 'right',
+                verticalPosition: 'top',
+              });
+              this.router.navigateByUrl("pages/mypages")
             }
             else {
-              console.log("Not Done");
+              this.toaster.open("Try again", "close", {
+                horizontalPosition: 'right',
+                verticalPosition: 'top',
+              });
             }
           },
           (error) => {
-            console.log(error);
+            this.toaster.open("Try again", "close", {
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
           })
         }
       }

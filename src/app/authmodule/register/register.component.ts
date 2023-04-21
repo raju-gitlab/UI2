@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -17,13 +18,15 @@ export class RegisterComponent {
 
   });
 
-  constructor(private dataservice : DataService) {}
+  constructor(private dataservice : DataService, private router : Router) {}
   onExpSubmit() {
     this.dataservice.post("Auth/Register", this.registerForm.value).subscribe(data => {
-      console.log(data);
+      if(data != null) {
+        this.router.navigate(['/login']);
+      }
     },
     error => {
-      console.log(error);
+      this.router.navigate(['/Register']);
     });
     console.log(this.registerForm.value);
   }

@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthmainComponent } from './authmain.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AuthmainComponent } from './authmain.component';
     RestPasswordComponent,
     LoginComponent,
     LogoutComponent,
-    AuthmainComponent
+    AuthmainComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

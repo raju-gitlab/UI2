@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { right } from '@popperjs/core';
 import { DataService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit{
     Password: new FormControl('', Validators.required)
   });
 
-  public constructor(private data: DataService, private router: Router) {
+  public constructor(private data: DataService, private router: Router, private toaster : MatSnackBar) {
     console.log("Constructor Called");
   }
 
@@ -25,8 +27,17 @@ export class LoginComponent implements OnInit{
         this.router.navigateByUrl("");
       }
       else {
-        this.router.navigateByUrl("login");
+        this.toaster.open("UserName or Password in incorrect", "close", {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
       }
+    },
+    (error) => {
+      this.toaster.open("UserName or Password in incorrect", "close", {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
     });
   }
   ngOnInit(): void {

@@ -1,0 +1,55 @@
+.profbody {
+
+    margin-top: 20px;
+    width: 93%;
+}
+.profdiv {
+    position: relative;
+    left: 3%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    padding-left: 30px;
+    border-radius: 17px;
+}
+.details{ 
+    padding-top: 8px;
+}
+.resetPassw {
+    padding: 36px 8px 0px 3px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    padding-left: 30px;
+    border-radius: 17px;
+    width: 93%;
+    position: relative;
+    left: 3%;
+}
+.accntcntrl{
+    width: 93%;
+    left: 3%;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    border-radius: 17px;
+    padding: 8px;
+    padding-left: 30px;
+
+}
+.txtfild{ 
+    width: 90%;
+}
+.forgetpassw {
+    width: 93%;
+    left: 3%;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    border-radius: 17px;
+    padding: 8px;
+    padding-left: 30px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.postcrd {
+
+}

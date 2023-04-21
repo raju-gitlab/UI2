@@ -14,9 +14,11 @@ export class HomeComponent implements OnInit{
   isvisible = 'hidden';
   title:String = "";
   AllPosts : any;
+  html : any;
 
   public constructor(private popup: MatDialog, private dataservide : DataService) { 
     this.dataservide.get("Posts/ListPosts").subscribe(data => {
+      console.log(data);
       this.AllPosts = data;
     },
     error => {
